@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Name – OJAS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="mini-nav">
+        <h2>OJAS</h2>
+        <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+      </nav>
+      
+<div class="center-box fade">
+  <h1 id="greet"></h1>
+  <p id="meaning"></p>
+
+  <button onclick="goQuiz()">Discover Your Prakriti</button>
+</div>
+
+<script>
+    const nameRaw = localStorage.getItem("ojas_name") || "Friend";
+    const name = nameRaw.toLowerCase();
+    
+    document.getElementById("greet").innerText = `Hi ${nameRaw} 🌿`;
+    
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${name}`)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          const meaning =
+            data[0]?.meanings?.[0]?.definitions?.[0]?.definition;
+    
+          if (meaning) {
+            document.getElementById("meaning").innerText =
+              `What a beautiful meaning your name carries ✨\n\n${meaning}`;
+            return;
+          }
+        }
+    
+        // fallback
+        document.getElementById("meaning").innerText =
+          "Your name carries a unique vibration and individuality that Ayurveda deeply values. It reflects balance, awareness, and inner strength.";
+      })
+      .catch(() => {
+        document.getElementById("meaning").innerText =
+          "Your name reflects presence, uniqueness, and a natural harmony that aligns with Ayurvedic principles.";
+      });
+    
+    function goQuiz() {
+      window.location.href = "quiz.html";
+    }
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OJAS – Ayurvedic Lifestyle</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <h2>OJAS</h2>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="quiz.html">Dosha Quiz</a></li>
+    <li><a href="tips.html">Lifestyle Tips</a></li>
+    <li><a href="chatbot.html">Chatbot</a></li>
+  </ul>
+  <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+  
+
+</nav>
+
+<section class="container">
+  <h1>Daily Ayurvedic Routine</h1>
+  <div class="cards">
+    <div class="card">🌅 Wake up early and hydrate</div>
+    <div class="card">🧘 Practice yoga or stretching</div>
+    <div class="card">🍵 Eat light, fresh meals</div>
+    <div class="card">🌙 Sleep early for balance</div>
+  </div>
+</section>
+<script>
+  function toggleDark() {
+    document.body.classList.toggle("dark");
+  
+    if (document.body.classList.contains("dark")) {
+      localStorage.setItem("ojas_theme", "dark");
+    } else {
+      localStorage.setItem("ojas_theme", "light");
+    }
+  }
+  
+  window.onload = () => {
+    if (localStorage.getItem("ojas_theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  };
+  </script>
+  
+</body>
+</html>

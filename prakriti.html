@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Prakriti – OJAS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="body">
+
+    <div class="center-box fade">
+      <h1 id="type" class="reveal-title"></h1>
+      <p id="desc" class="reveal-text"></p>
+    
+      <div class="traits" id="traits"></div>
+    </div>
+    
+    <script>
+    const p = localStorage.getItem("prakriti");
+    const b = document.getElementById("body");
+    const t = document.getElementById("type");
+    const d = document.getElementById("desc");
+    const traits = document.getElementById("traits");
+    
+    if (p === "pitta") {
+      b.classList.add("pitta");
+      t.innerText = "You are Pitta 🔥";
+      d.innerText = "Focused, driven, confident, and passionate.";
+      traits.innerHTML = `
+        <div class="trait">🔥 Leadership</div>
+        <div class="trait">🎯 Focus</div>
+        <div class="trait">⚡ Energy</div>
+      `;
+    }
+    
+    if (p === "vata") {
+      b.classList.add("vata");
+      t.innerText = "You are Vata 💨";
+      d.innerText = "Creative, expressive, quick-thinking, and imaginative.";
+      traits.innerHTML = `
+        <div class="trait">🎨 Creativity</div>
+        <div class="trait">💬 Expression</div>
+        <div class="trait">🌬 Flexibility</div>
+      `;
+    }
+    
+    if (p === "kapha") {
+      b.classList.add("kapha");
+      t.innerText = "You are Kapha 🌿";
+      d.innerText = "Calm, nurturing, grounded, and emotionally strong.";
+      traits.innerHTML = `
+        <div class="trait">🌱 Stability</div>
+        <div class="trait">❤️ Compassion</div>
+        <div class="trait">🧘 Calmness</div>
+      `;
+    }
+    </script>
+    
+    </body>
+    
+</html>

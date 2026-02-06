@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to OJAS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="landing">
+  <nav class="mini-nav">
+    <h2>OJAS</h2>
+    <button class="dark-toggle" onclick="toggleDark()">🌙</button>
+  </nav>
+  
+<div class="center-box fade">
+  <h1>Welcome to OJAS 🌿</h1>
+  <p>What’s your name?</p>
+
+  <input id="nameInput" placeholder="Enter your name">
+  <br><br>
+  <button onclick="saveName()">Continue</button>
+</div>
+
+<script>
+function saveName() {
+  const name = document.getElementById("nameInput").value || "Friend";
+  localStorage.setItem("ojas_name", name);
+  window.location.href = "meaning.html";
+}
+</script>
+<script>
+  function toggleDark() {
+    document.body.classList.toggle("dark");
+  
+    if (document.body.classList.contains("dark")) {
+      localStorage.setItem("ojas_theme", "dark");
+    } else {
+      localStorage.setItem("ojas_theme", "light");
+    }
+  }
+  
+  window.onload = () => {
+    if (localStorage.getItem("ojas_theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+  };
+  </script>
+  
+</body>
+</html>
