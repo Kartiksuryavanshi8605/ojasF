@@ -1,48 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-  <title>Welcome to OJAS</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OJAS — Prakriti Analyser</title>
+  <meta name="theme-color" content="#f5ede0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="landing">
-  <nav class="mini-nav">
-    <h2>OJAS</h2>
-    <button class="dark-toggle" onclick="toggleDark()">🌙</button>
-  </nav>
-  
-<div class="center-box fade">
-  <h1>Welcome to OJAS 🌿</h1>
-  <p>What’s your name?</p>
+<body>
 
-  <input id="nameInput" placeholder="Enter your name">
-  <br><br>
-  <button onclick="saveName()">Continue</button>
-</div>
+  <!-- ═══════════════════════════════════════
+       SCREEN 1 — LANDING
+  ═══════════════════════════════════════ -->
+  <section id="screen-landing" class="screen active" aria-label="Landing">
 
-<script>
-function saveName() {
-  const name = document.getElementById("nameInput").value || "Friend";
-  localStorage.setItem("ojas_name", name);
-  window.location.href = "meaning.html";
-}
-</script>
-<script>
-  function toggleDark() {
-    document.body.classList.toggle("dark");
-  
-    if (document.body.classList.contains("dark")) {
-      localStorage.setItem("ojas_theme", "dark");
-    } else {
-      localStorage.setItem("ojas_theme", "light");
-    }
-  }
-  
-  window.onload = () => {
-    if (localStorage.getItem("ojas_theme") === "dark") {
-      document.body.classList.add("dark");
-    }
-  };
-  </script>
-  
+    <div class="land-bg" aria-hidden="true">
+      <div class="land-orb land-orb--1"></div>
+      <div class="land-orb land-orb--2"></div>
+      <div class="land-orb land-orb--3"></div>
+      <canvas id="particle-canvas"></canvas>
+    </div>
+
+    <!-- Phase A: Splash -->
+    <div class="land-splash" id="land-splash">
+      <div class="land-lotus" aria-hidden="true">🪷</div>
+      <h1 class="brand-title">OJAS</h1>
+      <p class="brand-sub">Prakriti Analyser</p>
+      <div class="dosha-pills" aria-label="The three doshas">
+        <span class="pill pill--vata">💨 Vata</span>
+        <span class="pill pill--pitta">🔥 Pitta</span>
+        <span class="pill pill--kapha">🌿 Kapha</span>
+      </div>
+      <p class="land-desc">
+        Rooted in <em>Charaka &amp; Sushruta Samhita</em>. 18 questions across
+        body, physiology and mind — discover your constitution with dosha
+        breakdown, imbalance signs, diet, lifestyle &amp; daily rhythm.
+      </p>
+      <div class="land-features" aria-hidden="true">
+        <div class="feat"><span>📜</span><span>Classical</span></div>
+        <div class="feat"><span>🔍</span><span>Dual Dosha</span></div>
+        <div class="feat"><span>🥗</span><span>Diet</span></div>
+        <div class="feat"><span>🌅</span><span>Rhythm</span></div>
+        <div class="feat"><span>⚠️</span><span>Imbalance</span></div>
+      </div>
+      <button class="btn btn--rose" id="btn-enter">Begin My Analysis →</button>
+    </div>
+
+    <!-- Phase B: Name entry -->
+    <div class="land-name-panel" id="land-name-panel" aria-hidden="true">
+      <button class="name-back-btn" id="btn-name-back" aria-label="Back to splash">← Back</button>
+      <div class="name-panel-inner">
+        <div class="name-lotus" aria-hidden="true">🪷</div>
+        <h2 class="name-title">What's your name?</h2>
+        <p class="name-sub">Your results will be personalised to you</p>
+        <input
+          class="name-field"
+          id="inp-name"
+          type="text"
+          maxlength="40"
+          autocomplete="given-name"
+          placeholder="Enter your name…"
+          aria-label="Your name"
+        />
+        <button class="btn btn--rose btn--full" id="btn-start">Start Analysis →</button>
+        <p class="name-hint">Press Enter or tap Start</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 2 — QUIZ
+  ═══════════════════════════════════════ -->
+  <section id="screen-quiz" class="screen" aria-label="Prakriti quiz">
+
+    <div class="quiz-topbar">
+      <span class="quiz-counter" id="quiz-counter" aria-live="polite">1 / 18</span>
+      <div class="dosha-live" aria-label="Running dosha scores">
+        <span class="dlive dlive--v" id="dl-v">💨 0</span>
+        <span class="dlive dlive--p" id="dl-p">🔥 0</span>
+        <span class="dlive dlive--k" id="dl-k">🌿 0</span>
+      </div>
+    </div>
+
+    <div class="quiz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="18" aria-valuenow="0">
+      <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+    </div>
+
+    <div class="quiz-nav-row">
+      <button class="btn-back" id="btn-back" disabled aria-label="Previous question">← Back</button>
+      <span class="save-indicator" id="save-indicator">
+        <span class="save-dot"></span> Saved
+      </span>
+    </div>
+
+    <div class="quiz-stage">
+      <div class="q-ghost q-ghost--2" aria-hidden="true"></div>
+      <div class="q-ghost q-ghost--1" aria-hidden="true"></div>
+      <div class="q-card" id="q-card" role="main">
+        <div class="q-meta">
+          <div class="q-icon-wrap" id="q-icon" aria-hidden="true">🌿</div>
+          <span class="q-category" id="q-category">Body</span>
+        </div>
+        <p class="q-text" id="q-text">Loading…</p>
+        <div class="q-options" id="q-options" role="group" aria-label="Answer options"></div>
+        <div class="q-fact" id="q-fact" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="quiz-kb-hint" aria-label="Keyboard shortcuts">
+      Press <kbd>A</kbd> · <kbd>B</kbd> · <kbd>C</kbd> to answer
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 3 — RESULT
+  ═══════════════════════════════════════ -->
+  <section id="screen-result" class="screen" aria-label="Your Prakriti result">
+
+    <div class="res-orb res-orb--1" aria-hidden="true"></div>
+    <div class="res-orb res-orb--2" aria-hidden="true"></div>
+
+    <header class="res-header">
+      <span class="res-brand">OJAS</span>
+      <button class="btn btn--outline btn--sm" id="btn-retake">↺ Retake</button>
+    </header>
+
+    <div class="res-scroll" id="res-scroll"></div>
+
+  </section>
+
+
+  <!-- ─── Global UI ─── -->
+  <button id="dark-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+  <script src="app.js"></script>
+  <script src="quiz.js"></script>
+  <script src="result.js"></script>
 </body>
 </html>
