@@ -6,7 +6,7 @@
 /* ── 18 Questions ── */
 const QUESTIONS = [
   {
-    icon: '🦴', cat: 'Body · Frame',
+    icon: ICONS.frame, cat: 'Body · Frame',
     text: 'Your natural body type?',
     fact: '📜 Charaka: Vata = laghu (light), Pitta = madhyama (medium), Kapha = sthula (solid). Frame is the most reliable physical Prakriti marker.',
     opts: [
@@ -16,7 +16,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '👁️', cat: 'Body · Eyes',
+    icon: ICONS.eyes, cat: 'Body · Eyes',
     text: 'Describe your eyes honestly:',
     fact: '📜 Sushruta: Vata eyes are small and restless, Pitta eyes are sharp with a reddish tinge, Kapha eyes are large, white and beautifully lustrous.',
     opts: [
@@ -26,7 +26,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🖐️', cat: 'Body · Skin',
+    icon: ICONS.skin, cat: 'Body · Skin',
     text: 'Your skin on a normal day:',
     fact: '📜 Skin texture is one of the most reliable Prakriti signs: Vata = ruksha (dry/rough), Pitta = ushna (warm/sensitive), Kapha = snigdha (smooth/moist).',
     opts: [
@@ -36,7 +36,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🌡️', cat: 'Body · Temperature',
+    icon: ICONS.temp, cat: 'Body · Temperature',
     text: 'You are usually…',
     fact: '📜 Vata = sheeta (cold-natured). Pitta = ushna (heat-natured). Kapha = sheeta but denser — tolerates cold better than Vata.',
     opts: [
@@ -46,7 +46,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '⚡', cat: 'Body · Energy',
+    icon: ICONS.energy, cat: 'Body · Energy',
     text: 'Your natural energy pattern:',
     fact: '📜 Vata energy is "vishama" (variable) — bursts and crashes. Pitta is "tikshna" (intense and directed). Kapha is "sthira" (slow to start but highly enduring).',
     opts: [
@@ -56,7 +56,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🦷', cat: 'Body · Joints & Teeth',
+    icon: ICONS.joints, cat: 'Body · Joints & Teeth',
     text: 'Your joints and teeth:',
     fact: '📜 Sushruta: Vata joints are "chala" (unstable/clicking), Pitta teeth are yellowish and moderate, Kapha teeth are "drudha" (strong, white, firmly set).',
     opts: [
@@ -66,7 +66,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🍽️', cat: 'Digestion · Hunger',
+    icon: ICONS.hunger, cat: 'Digestion · Hunger',
     text: 'Your appetite on a typical day:',
     fact: '📜 Agni (digestive fire) is Prakriti\'s fingerprint: Vata = vishama agni (irregular), Pitta = tikshna agni (sharp), Kapha = manda agni (slow and gentle).',
     opts: [
@@ -76,7 +76,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '💤', cat: 'Digestion · Sleep',
+    icon: ICONS.sleep, cat: 'Digestion · Sleep',
     text: 'How you naturally sleep:',
     fact: '📜 Sleep reveals dosha: Vata = light and broken, Pitta = moderate and purposeful, Kapha = deep and prolonged. The heaviest sleepers are always Kapha.',
     opts: [
@@ -86,7 +86,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '💧', cat: 'Digestion · Sweat',
+    icon: ICONS.sweat, cat: 'Digestion · Sweat',
     text: 'How you sweat:',
     fact: '📜 Sushruta lists profuse sweating and strong odour as clear Pitta Prakriti signs — "svedano" and "durgandha".',
     opts: [
@@ -96,7 +96,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🗣️', cat: 'Digestion · Voice',
+    icon: ICONS.voice, cat: 'Digestion · Voice',
     text: 'How people describe your voice and speech:',
     fact: '📜 Voice is a direct dosha marker: Vata = parusha (rough/fast), Pitta = madhura (clear/sharp), Kapha = mridhu (deep/slow/melodious).',
     opts: [
@@ -106,7 +106,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🌦️', cat: 'Digestion · Weather',
+    icon: ICONS.weather, cat: 'Digestion · Weather',
     text: 'Which weather genuinely suits you best?',
     fact: '📜 Law of opposites: Vata (cold/dry) thrives in warm/humid, Pitta (hot) in cool/dry, Kapha (cold/heavy) in warm/dry stimulating environments.',
     opts: [
@@ -116,7 +116,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🚽', cat: 'Digestion · Digestion',
+    icon: ICONS.digestion, cat: 'Digestion · Digestion',
     text: 'Your bowels on a regular basis:',
     fact: '📜 Bowel character is among Charaka\'s most reliable Prakriti signs — Vata dries, Pitta loosens, Kapha slows and bulks.',
     opts: [
@@ -126,7 +126,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🧠', cat: 'Mind · Learning',
+    icon: ICONS.learning, cat: 'Mind · Learning',
     text: 'How you learn and remember things:',
     fact: '📜 Charaka: Vata = grahi (quick in, quick out), Pitta = medhavi (sharp and retentive), Kapha = chiragrahi (slow but never forgets once learned).',
     opts: [
@@ -136,7 +136,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🎯', cat: 'Mind · Decisions',
+    icon: ICONS.decisions, cat: 'Mind · Decisions',
     text: 'How you make important decisions:',
     fact: '📜 Vata = chanchala (fickle). Pitta = nipunamati (decisive). Kapha = drudha vaira (deliberate, lasting commitments that rarely waver).',
     opts: [
@@ -146,7 +146,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '😤', cat: 'Mind · Stress',
+    icon: ICONS.stress, cat: 'Mind · Stress',
     text: 'Under pressure, you typically:',
     fact: '📜 Charaka links anxiety/fear to Vata, anger/irritability to Pitta, depression/withdrawal to Kapha as primary stress responses.',
     opts: [
@@ -156,7 +156,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🤝', cat: 'Mind · Relationships',
+    icon: ICONS.social, cat: 'Mind · Relationships',
     text: 'Your natural social style:',
     fact: '📜 Kapha types are "krutajna" (loyal, grateful). Pitta types are assertive with deep but demanding bonds. Vata types have many connections but lighter bonds.',
     opts: [
@@ -166,7 +166,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '💰', cat: 'Mind · Money',
+    icon: ICONS.money, cat: 'Mind · Money',
     text: 'Your relationship with money and goals:',
     fact: '📜 Charaka: Vata = alpa dhan (poor at saving), Pitta = madhya dhana (ambitious earner), Kapha = bahu dhana (slow steady accumulator).',
     opts: [
@@ -176,7 +176,7 @@ const QUESTIONS = [
     ],
   },
   {
-    icon: '🌅', cat: 'Mind · Mornings',
+    icon: ICONS.mornings, cat: 'Mind · Mornings',
     text: 'You before 9am:',
     fact: '📜 Morning behaviour reflects dosha cycles: Vata peaks at dawn (3–7 AM) — restless. Pitta 10–2. Kapha 6–10 — the hardest time to leave bed.',
     opts: [
@@ -190,7 +190,7 @@ const QUESTIONS = [
 /* ── Dosha Data ── */
 const DOSHA = {
   v: {
-    name: 'Vata', label: 'Vata Prakriti', icon: '💨',
+    name: 'Vata', label: 'Vata Prakriti', icon: ICONS.vata,
     element: 'Ākāsha (Ether) + Vāyu (Air)',
     color: '#2e6e96', themeClass: 'res-theme--vata',
     bgClass: 'res-bg--vata', nameClass: 'res-name--vata', traitClass: 'trait--vata',
@@ -223,22 +223,22 @@ const DOSHA = {
       { time: '10 PM',   action: 'In bed by 10 PM. Gentle reading or meditation.' },
     ],
     herbs: [
-      { icon: '🌿', name: 'Ashwagandha',  sanskrit: 'Withania somnifera',      use: 'The premier Vata tonic — builds ojas (vital essence), calms the nervous system and grounds scattered Vata energy. Especially powerful at bedtime.' },
-      { icon: '🍵', name: 'Shatavari',    sanskrit: 'Asparagus racemosus',     use: 'Deeply nourishing and moistening — counters the dryness of Vata. Supports reproductive health and all building (brumhana) therapies.' },
-      { icon: '🌱', name: 'Bala',         sanskrit: 'Sida cordifolia',         use: 'Strengthens muscles, nerves and the heart. Gives stamina and endurance to Vata types prone to depletion.' },
-      { icon: '🍂', name: 'Haritaki',     sanskrit: 'Terminalia chebula',      use: 'The "king of medicines" for Vata. Gently lubricates and relieves constipation, the most common Vata complaint.' },
-      { icon: '🌸', name: 'Brahmi',       sanskrit: 'Bacopa monnieri',         use: 'Calms and clarifies the mind. Reduces anxiety and mental restlessness — the hallmarks of excess Vata in the nervous system.' },
-      { icon: '🍯', name: 'Sesame',       sanskrit: 'Sesamum indicum',         use: 'Used internally and externally. Warm sesame oil Abhyanga is the single most effective daily Vata-pacifying practice in Ayurveda.' },
+      { icon: ICONS.kapha, name: 'Ashwagandha',  sanskrit: 'Withania somnifera',      use: 'The premier Vata tonic — builds ojas (vital essence), calms the nervous system and grounds scattered Vata energy. Especially powerful at bedtime.' },
+      { icon: ICONS.tea, name: 'Shatavari',    sanskrit: 'Asparagus racemosus',     use: 'Deeply nourishing and moistening — counters the dryness of Vata. Supports reproductive health and all building (brumhana) therapies.' },
+      { icon: ICONS.herb, name: 'Bala',         sanskrit: 'Sida cordifolia',         use: 'Strengthens muscles, nerves and the heart. Gives stamina and endurance to Vata types prone to depletion.' },
+      { icon: ICONS.season, name: 'Haritaki',     sanskrit: 'Terminalia chebula',      use: 'The "king of medicines" for Vata. Gently lubricates and relieves constipation, the most common Vata complaint.' },
+      { icon: ICONS.flower, name: 'Brahmi',       sanskrit: 'Bacopa monnieri',         use: 'Calms and clarifies the mind. Reduces anxiety and mental restlessness — the hallmarks of excess Vata in the nervous system.' },
+      { icon: ICONS.potion, name: 'Sesame',       sanskrit: 'Sesamum indicum',         use: 'Used internally and externally. Warm sesame oil Abhyanga is the single most effective daily Vata-pacifying practice in Ayurveda.' },
     ],
     seasons: [
-      { icon: '🍂', name: 'Autumn',      tip: 'Vata peaks in autumn — the most critical season. Eat warm oily foods, keep strictly warm, follow routine.', active: true },
-      { icon: '❄️', name: 'Winter',      tip: 'Vata continues high. Warm baths, nourishing foods and early bedtimes are essential protection.', active: false },
-      { icon: '🌸', name: 'Spring',      tip: 'Vata naturally calms. Use spring to build strength and nourishment for the rest of the year.', active: false },
-      { icon: '☀️', name: 'Summer',      tip: 'Vata is generally comfortable in warmth. Avoid overheating and stay hydrated.', active: false },
+      { icon: ICONS.season, name: 'Autumn',      tip: 'Vata peaks in autumn — the most critical season. Eat warm oily foods, keep strictly warm, follow routine.', active: true },
+      { icon: ICONS.winter, name: 'Winter',      tip: 'Vata continues high. Warm baths, nourishing foods and early bedtimes are essential protection.', active: false },
+      { icon: ICONS.flower, name: 'Spring',      tip: 'Vata naturally calms. Use spring to build strength and nourishment for the rest of the year.', active: false },
+      { icon: ICONS.summer, name: 'Summer',      tip: 'Vata is generally comfortable in warmth. Avoid overheating and stay hydrated.', active: false },
     ],
   },
   p: {
-    name: 'Pitta', label: 'Pitta Prakriti', icon: '🔥',
+    name: 'Pitta', label: 'Pitta Prakriti', icon: ICONS.pitta,
     element: 'Agni (Fire) + Āpa (Water)',
     color: '#b04020', themeClass: 'res-theme--pitta',
     bgClass: 'res-bg--pitta', nameClass: 'res-name--pitta', traitClass: 'trait--pitta',
@@ -271,22 +271,22 @@ const DOSHA = {
       { time: '10 PM',   action: 'In bed by 10 PM. Avoid stimulating work or screens late at night.' },
     ],
     herbs: [
-      { icon: '🌹', name: 'Amalaki',    sanskrit: 'Emblica officinalis',     use: 'The premier Pitta herb. The richest natural source of Vitamin C — cooling, deeply nourishing, anti-inflammatory and rejuvenating for liver and eyes.' },
-      { icon: '🌿', name: 'Shatavari',  sanskrit: 'Asparagus racemosus',     use: 'Cooling, sweet and deeply moistening. Reduces inflammation, supports the liver and calms the intensity of Pitta in the blood.' },
-      { icon: '🍃', name: 'Neem',       sanskrit: 'Azadirachta indica',      use: 'Intensely bitter and cooling. Clears Pitta heat from the blood, skin and liver. One of the most powerful anti-inflammatory herbs in Ayurveda.' },
-      { icon: '🌸', name: 'Rose',       sanskrit: 'Rosa centifolia',         use: 'Cools Pitta in the heart and emotions. Rose water and rose petal jam (Gulkand) are classic Pitta remedies for internal heat and irritability.' },
-      { icon: '💛', name: 'Turmeric',   sanskrit: 'Curcuma longa',           use: 'Anti-inflammatory and liver-protective. Clears Pitta from the gut, blood and skin while supporting bile flow and digestion.' },
-      { icon: '🍵', name: 'Bhringraj',  sanskrit: 'Eclipta alba',            use: 'Cools Pitta specifically in the head and liver. Treats early greying, thinning hair and liver inflammation caused by excess heat.' },
+      { icon: ICONS.flower, name: 'Amalaki',    sanskrit: 'Emblica officinalis',     use: 'The premier Pitta herb. The richest natural source of Vitamin C — cooling, deeply nourishing, anti-inflammatory and rejuvenating for liver and eyes.' },
+      { icon: ICONS.kapha, name: 'Shatavari',  sanskrit: 'Asparagus racemosus',     use: 'Cooling, sweet and deeply moistening. Reduces inflammation, supports the liver and calms the intensity of Pitta in the blood.' },
+      { icon: ICONS.herb, name: 'Neem',       sanskrit: 'Azadirachta indica',      use: 'Intensely bitter and cooling. Clears Pitta heat from the blood, skin and liver. One of the most powerful anti-inflammatory herbs in Ayurveda.' },
+      { icon: ICONS.flower, name: 'Rose',       sanskrit: 'Rosa centifolia',         use: 'Cools Pitta in the heart and emotions. Rose water and rose petal jam (Gulkand) are classic Pitta remedies for internal heat and irritability.' },
+      { icon: ICONS.herb, name: 'Turmeric',   sanskrit: 'Curcuma longa',           use: 'Anti-inflammatory and liver-protective. Clears Pitta from the gut, blood and skin while supporting bile flow and digestion.' },
+      { icon: ICONS.tea, name: 'Bhringraj',  sanskrit: 'Eclipta alba',            use: 'Cools Pitta specifically in the head and liver. Treats early greying, thinning hair and liver inflammation caused by excess heat.' },
     ],
     seasons: [
-      { icon: '☀️', name: 'Summer',     tip: 'Pitta peaks in summer — the most critical season. Cooling foods, avoid midday sun, take coconut water daily.', active: true },
-      { icon: '🌸', name: 'Late Spring', tip: 'Pitta begins building. Start cooling practices: rose water, cucumber, reduce spicy food.', active: false },
-      { icon: '🍂', name: 'Autumn',     tip: 'Pitta naturally cools down. Good time for moderate cleansing and liver-supporting herbs.', active: false },
-      { icon: '❄️', name: 'Winter',     tip: 'Pitta well-pacified. You can enjoy warming foods without concern. Focus on building strength.', active: false },
+      { icon: ICONS.summer, name: 'Summer',     tip: 'Pitta peaks in summer — the most critical season. Cooling foods, avoid midday sun, take coconut water daily.', active: true },
+      { icon: ICONS.flower, name: 'Late Spring', tip: 'Pitta begins building. Start cooling practices: rose water, cucumber, reduce spicy food.', active: false },
+      { icon: ICONS.season, name: 'Autumn',     tip: 'Pitta naturally cools down. Good time for moderate cleansing and liver-supporting herbs.', active: false },
+      { icon: ICONS.winter, name: 'Winter',     tip: 'Pitta well-pacified. You can enjoy warming foods without concern. Focus on building strength.', active: false },
     ],
   },
   k: {
-    name: 'Kapha', label: 'Kapha Prakriti', icon: '🌿',
+    name: 'Kapha', label: 'Kapha Prakriti', icon: ICONS.kapha,
     element: 'Prthvi (Earth) + Āpa (Water)',
     color: '#2a6840', themeClass: 'res-theme--kapha',
     bgClass: 'res-bg--kapha', nameClass: 'res-name--kapha', traitClass: 'trait--kapha',
@@ -319,18 +319,18 @@ const DOSHA = {
       { time: '7 PM',      action: 'Light early dinner. Finish eating by 7:30 PM if possible.' },
     ],
     herbs: [
-      { icon: '🔥', name: 'Trikatu',    sanskrit: 'Piper longum + Piper nigrum + Zingiber', use: 'The most important Kapha formula — three pungent herbs that kindle Agni, burn ama (toxins) and scrape Kapha from the channels.' },
-      { icon: '🌿', name: 'Guggul',     sanskrit: 'Commiphora mukul',                       use: 'Deep scraping and detoxifying resin. Clears excess Kapha from channels, reduces cholesterol and supports healthy weight.' },
-      { icon: '🍵', name: 'Ginger',     sanskrit: 'Zingiber officinale',                    use: 'The universal Kapha medicine. Stimulates Agni, breaks up mucus and congestion and warms the cold Kapha constitution.' },
-      { icon: '🌱', name: 'Punarnava',  sanskrit: 'Boerhavia diffusa',                      use: 'Reduces water retention and Kapha-related swelling. Rejuvenates the kidneys and lymphatic system.' },
-      { icon: '🍯', name: 'Honey',      sanskrit: 'Madhu',                                  use: 'The only sweet substance that pacifies Kapha (raw, never heated). Scrapes excess Kapha and reduces ama when taken with warm water.' },
-      { icon: '🌸', name: 'Tulsi',      sanskrit: 'Ocimum sanctum',                         use: 'Warming, expectorant and immuno-stimulating. Clears Kapha from the respiratory tract and elevates mood and energy.' },
+      { icon: ICONS.pitta, name: 'Trikatu',    sanskrit: 'Piper longum + Piper nigrum + Zingiber', use: 'The most important Kapha formula — three pungent herbs that kindle Agni, burn ama (toxins) and scrape Kapha from the channels.' },
+      { icon: ICONS.kapha, name: 'Guggul',     sanskrit: 'Commiphora mukul',                       use: 'Deep scraping and detoxifying resin. Clears excess Kapha from channels, reduces cholesterol and supports healthy weight.' },
+      { icon: ICONS.tea, name: 'Ginger',     sanskrit: 'Zingiber officinale',                    use: 'The universal Kapha medicine. Stimulates Agni, breaks up mucus and congestion and warms the cold Kapha constitution.' },
+      { icon: ICONS.herb, name: 'Punarnava',  sanskrit: 'Boerhavia diffusa',                      use: 'Reduces water retention and Kapha-related swelling. Rejuvenates the kidneys and lymphatic system.' },
+      { icon: ICONS.potion, name: 'Honey',      sanskrit: 'Madhu',                                  use: 'The only sweet substance that pacifies Kapha (raw, never heated). Scrapes excess Kapha and reduces ama when taken with warm water.' },
+      { icon: ICONS.flower, name: 'Tulsi',      sanskrit: 'Ocimum sanctum',                         use: 'Warming, expectorant and immuno-stimulating. Clears Kapha from the respiratory tract and elevates mood and energy.' },
     ],
     seasons: [
-      { icon: '🌸', name: 'Spring',  tip: 'Kapha peaks in spring — most critical season. Vigorous exercise and light eating are essential. Risk of congestion and lethargy.', active: true },
-      { icon: '❄️', name: 'Winter',  tip: 'Kapha accumulates in cold. Eat warm spiced foods, exercise daily, avoid dairy and sweets.', active: false },
-      { icon: '☀️', name: 'Summer',  tip: 'Kapha naturally pacified by heat and dryness. Your best season for energy and clarity.', active: false },
-      { icon: '🍂', name: 'Autumn',  tip: 'Kapha remains comfortable. Maintain exercise routine and avoid emotional eating as cold approaches.', active: false },
+      { icon: ICONS.flower, name: 'Spring',  tip: 'Kapha peaks in spring — most critical season. Vigorous exercise and light eating are essential. Risk of congestion and lethargy.', active: true },
+      { icon: ICONS.winter, name: 'Winter',  tip: 'Kapha accumulates in cold. Eat warm spiced foods, exercise daily, avoid dairy and sweets.', active: false },
+      { icon: ICONS.summer, name: 'Summer',  tip: 'Kapha naturally pacified by heat and dryness. Your best season for energy and clarity.', active: false },
+      { icon: ICONS.season, name: 'Autumn',  tip: 'Kapha remains comfortable. Maintain exercise routine and avoid emotional eating as cold approaches.', active: false },
     ],
   },
 };
@@ -351,7 +351,7 @@ function renderQuestion() {
   document.getElementById('quiz-counter').textContent = `${App.currentQ + 1} / ${tot}`;
   document.querySelector('.quiz-progress').setAttribute('aria-valuenow', App.currentQ + 1);
   document.getElementById('quiz-progress-fill').style.width = `${(App.currentQ / tot) * 100}%`;
-  document.getElementById('q-icon').textContent = q.icon;
+  document.getElementById('q-icon').innerHTML = q.icon;
   document.getElementById('q-category').textContent = q.cat;
   document.getElementById('q-text').textContent = q.text;
   document.getElementById('q-fact').textContent = '';
@@ -396,7 +396,7 @@ function pickAnswer(dosha, btn, fact) {
   // Flash emoji
   const flash = document.createElement('div');
   flash.className = 'answer-flash';
-  flash.textContent = { v: '💨', p: '🔥', k: '🌿' }[dosha];
+  flash.innerHTML = { v: ICONS.vata, p: ICONS.pitta, k: ICONS.kapha }[dosha];
   flash.setAttribute('aria-hidden', 'true');
   document.body.appendChild(flash);
   setTimeout(() => flash.remove(), 520);
@@ -425,9 +425,9 @@ function pickAnswer(dosha, btn, fact) {
 }
 
 function updateLiveBadges() {
-  document.getElementById('dl-v').textContent = `💨 ${App.scores.v}`;
-  document.getElementById('dl-p').textContent = `🔥 ${App.scores.p}`;
-  document.getElementById('dl-k').textContent = `🌿 ${App.scores.k}`;
+  document.getElementById('dl-v').innerHTML = `${ICONS.vata} ${App.scores.v}`;
+  document.getElementById('dl-p').innerHTML = `${ICONS.pitta} ${App.scores.p}`;
+  document.getElementById('dl-k').innerHTML = `${ICONS.kapha} ${App.scores.k}`;
 }
 
 // Back button

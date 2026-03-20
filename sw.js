@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ojas-cache-v1';
+const CACHE_NAME = 'ojas-cache-v3';
 const urlsToCache = [
   './',
   './index.html',

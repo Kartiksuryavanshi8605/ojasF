@@ -31,7 +31,7 @@ function buildResult() {
   const bK = Math.round((App.scores.k / tot) * 100);
 
   const names = { v:'Vata', p:'Pitta', k:'Kapha' };
-  const icons = { v:'💨',   p:'🔥',   k:'🌿'   };
+  const icons = { v: ICONS.vata, p: ICONS.pitta, k: ICONS.kapha };
 
   const shareURL = `${location.href.split('#')[0]}#r/${dom}/${App.scores.v}-${App.scores.p}-${App.scores.k}/${encodeURIComponent(App.name)}`;
 
@@ -57,9 +57,9 @@ function buildResult() {
       Each section below shows guidance for <em>both</em> — switch tabs to see each dosha's recommendations.
     </p>
     <div class="score-row">
-      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">💨 Vata ${App.scores.v}/${tot}</span>
-      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">🔥 Pitta ${App.scores.p}/${tot}</span>
-      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">🌿 Kapha ${App.scores.k}/${tot}</span>
+      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
+      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
+      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
     </div>
     <div class="traits">
       ${d.traits.map(t=>`<span class="trait ${d.traitClass}">${t}</span>`).join('')}
@@ -91,9 +91,9 @@ function buildResult() {
     </p>
     <p style="color:var(--ink2);font-size:.9rem;line-height:1.85;max-width:500px;margin:.5rem auto">${d.desc}</p>
     <div class="score-row">
-      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">💨 Vata ${App.scores.v}/${tot}</span>
-      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">🔥 Pitta ${App.scores.p}/${tot}</span>
-      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">🌿 Kapha ${App.scores.k}/${tot}</span>
+      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
+      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
+      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
     </div>
     <div class="traits">
       ${d.traits.map(t=>`<span class="trait ${d.traitClass}">${t}</span>`).join('')}
@@ -103,11 +103,11 @@ function buildResult() {
   /* ── Classical reference ── */
   const classicalNote = isDual ? `
     <div class="classical-note">
-      📜 <strong>${d.name}:</strong> ${d.classical}
+      ${ICONS.classical} <strong>${d.name}:</strong> ${d.classical}
       <br/><br/>
-      📜 <strong>${s.name}:</strong> ${s.classical}
+      ${ICONS.classical} <strong>${s.name}:</strong> ${s.classical}
     </div>` : `
-    <div class="classical-note">📜 <strong>Classical Reference:</strong> ${d.classical}</div>`;
+    <div class="classical-note">${ICONS.classical} <strong>Classical Reference:</strong> ${d.classical}</div>`;
 
   /* ══════════════════════════════════════════════════
      HELPERS
@@ -204,7 +204,7 @@ function buildResult() {
   const titleSuffix = isDual ? ` — ${d.name} & ${s.name}` : '';
 
   const whyCard = dualCard(
-    '🔍',
+    `${ICONS.search}`,
     `Why This Is Your Prakriti${titleSuffix}`,
     `<p class="why-text">${d.why}</p>`,
     `<p class="why-text">${d.why}</p>`,
@@ -212,37 +212,37 @@ function buildResult() {
   );
 
   const imbalanceCard = dualCard(
-    '⚠️', `Signs of Imbalance${titleSuffix}`,
+    `${ICONS.imbalance}`, `Signs of Imbalance${titleSuffix}`,
     imbalGrid(d), imbalGrid(d), imbalGrid(s)
   );
 
   const dietCard = dualCard(
-    '🥗', `Diet — Āhāra${titleSuffix}`,
+    `${ICONS.diet}`, `Diet — Āhāra${titleSuffix}`,
     paCols(d.foods), paCols(d.foods), paCols(s.foods)
   );
 
   const lifestyleCard = dualCard(
-    '🌅', `Lifestyle — Vihāra${titleSuffix}`,
+    `${ICONS.rhythm}`, `Lifestyle — Vihāra${titleSuffix}`,
     paCols(d.lifestyle), paCols(d.lifestyle), paCols(s.lifestyle)
   );
 
   const exerciseCard = dualCard(
-    '🏃', `Exercise — Vyāyāma${titleSuffix}`,
+    `${ICONS.exercise}`, `Exercise — Vyāyāma${titleSuffix}`,
     paCols(d.exercise), paCols(d.exercise), paCols(s.exercise)
   );
 
   const rhythmCard = dualCard(
-    '🕐', `Daily Rhythm — Dinacharya${titleSuffix}`,
+    `${ICONS.rhythm}`, `Daily Rhythm — Dinacharya${titleSuffix}`,
     rhythmPanel(d), rhythmPanel(d), rhythmPanel(s)
   );
 
   const herbCard = dualCard(
-    '🌿', `Classical Herbs — Dravyaguna${titleSuffix}`,
+    `${ICONS.kapha}`, `Classical Herbs — Dravyaguna${titleSuffix}`,
     herbPanel(d), herbPanel(d), herbPanel(s)
   );
 
   const seasonCard = dualCard(
-    '🍂', `Seasonal Guidance — Ritucharya${titleSuffix}`,
+    `${ICONS.season}`, `Seasonal Guidance — Ritucharya${titleSuffix}`,
     seasonPanel(d), seasonPanel(d), seasonPanel(s)
   );
 
@@ -250,7 +250,7 @@ function buildResult() {
   document.getElementById('res-scroll').innerHTML = `
 
     <div class="share-banner">
-      <span style="font-size:.78rem;color:var(--ink2);font-weight:700;white-space:nowrap">🔗 Share:</span>
+      <span style="font-size:.78rem;color:var(--ink2);font-weight:700;white-space:nowrap">${ICONS.share} Share:</span>
       <input class="share-url-input" id="share-url-input" value="${shareURL}" readonly aria-label="Shareable URL"/>
       <button class="btn-copy" id="btn-copy-url">Copy link</button>
     </div>
@@ -260,19 +260,19 @@ function buildResult() {
     ${classicalNote}
 
     <div class="breakdown">
-      <p class="breakdown-title">📊 Dosha Score Breakdown</p>
+      <p class="breakdown-title">${ICONS.chart} Dosha Score Breakdown</p>
       <div class="b-row">
-        <span class="b-label b-label--v">💨 Vata</span>
+        <span class="b-label b-label--v">${ICONS.vata} Vata</span>
         <div class="b-track"><div class="b-bar b-bar--v" id="bar-v" style="width:0%"></div></div>
         <span class="b-pct">${bV}%</span>
       </div>
       <div class="b-row">
-        <span class="b-label b-label--p">🔥 Pitta</span>
+        <span class="b-label b-label--p">${ICONS.pitta} Pitta</span>
         <div class="b-track"><div class="b-bar b-bar--p" id="bar-p" style="width:0%"></div></div>
         <span class="b-pct">${bP}%</span>
       </div>
       <div class="b-row">
-        <span class="b-label b-label--k">🌿 Kapha</span>
+        <span class="b-label b-label--k">${ICONS.kapha} Kapha</span>
         <div class="b-track"><div class="b-bar b-bar--k" id="bar-k" style="width:0%"></div></div>
         <span class="b-pct">${bK}%</span>
       </div>
@@ -280,6 +280,36 @@ function buildResult() {
         18 questions across <strong>Physical</strong> (Q1–6), <strong>Physiological</strong> (Q7–12) and
         <strong>Psychological</strong> (Q13–18) — CCRAS/AYUSH validated Prakriti assessment framework.
       </p>
+    </div>
+
+    <div class="ana-card" id="bmi-card">
+      <div class="card-head"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI</h3></div>
+      <p style="font-size:.82rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem">
+        Standard BMI assumes all frames are identical. Ayurveda recognizes <strong>Vata</strong> is naturally lighter and <strong>Kapha</strong> is naturally denser. 
+        Your unique Dosha shift adjusts your ideal weight zone by <strong style="color:var(--ink)">${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5) > 0 ? '+' : ''}${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5).toFixed(1)}</strong> points.
+      </p>
+      
+      <div style="display:flex; gap:10px; margin-bottom:1rem; border:1px solid var(--border); padding:.25rem; border-radius:8px; background:var(--bg2)">
+        <button id="btn-bmi-metric" style="flex:1; padding:.4rem; border-radius:6px; border:none; background:var(--surface); font-size:.75rem; font-weight:700; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.05); transition:all 0.2s">Metric</button>
+        <button id="btn-bmi-imperial" style="flex:1; padding:.4rem; border-radius:6px; border:none; background:transparent; color:var(--ink3); font-size:.75rem; font-weight:700; cursor:pointer; transition:all 0.2s">Imperial</button>
+      </div>
+      
+      <div id="bmi-inputs-metric" style="display:flex; gap:10px; margin-bottom:1rem;">
+        <input type="number" id="bmi-kg" placeholder="Weight (kg)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+        <input type="number" id="bmi-cm" placeholder="Height (cm)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+      </div>
+
+      <div id="bmi-inputs-imperial" style="display:none; flex-direction:column; gap:10px; margin-bottom:1rem;">
+        <input type="number" id="bmi-lbs" placeholder="Weight (lbs)" style="padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+        <div style="display:flex; gap:10px">
+          <input type="number" id="bmi-ft" placeholder="Height (ft)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+          <input type="number" id="bmi-in" placeholder="Height (in)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+        </div>
+      </div>
+
+      <button class="btn btn--gold btn--full" id="btn-calc-bmi">Calculate Corrected BMI</button>
+      
+      <div id="bmi-output" style="display:none; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);"></div>
     </div>
 
     ${whyCard}
@@ -339,6 +369,118 @@ function buildResult() {
       document.getElementById('share-url-input').select();
       this.textContent = '↑ Select & copy';
     });
+  });
+
+  /* ── BMI Calculator Bindings ── */
+  let isMetric = true;
+  document.getElementById('btn-bmi-metric').addEventListener('click', e => {
+    isMetric = true;
+    e.target.style.background = 'var(--surface)';
+    e.target.style.color = 'var(--ink)';
+    e.target.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+    const imp = document.getElementById('btn-bmi-imperial');
+    imp.style.background = 'transparent';
+    imp.style.color = 'var(--ink3)';
+    imp.style.boxShadow = 'none';
+    document.getElementById('bmi-inputs-metric').style.display = 'flex';
+    document.getElementById('bmi-inputs-imperial').style.display = 'none';
+    document.getElementById('bmi-output').style.display = 'none';
+  });
+  
+  document.getElementById('btn-bmi-imperial').addEventListener('click', e => {
+    isMetric = false;
+    e.target.style.background = 'var(--surface)';
+    e.target.style.color = 'var(--ink)';
+    e.target.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+    const met = document.getElementById('btn-bmi-metric');
+    met.style.background = 'transparent';
+    met.style.color = 'var(--ink3)';
+    met.style.boxShadow = 'none';
+    document.getElementById('bmi-inputs-metric').style.display = 'none';
+    document.getElementById('bmi-inputs-imperial').style.display = 'flex';
+    document.getElementById('bmi-output').style.display = 'none';
+  });
+
+  document.getElementById('btn-calc-bmi').addEventListener('click', () => {
+    let w, h;
+    if (isMetric) {
+      w = parseFloat(document.getElementById('bmi-kg').value);
+      h = parseFloat(document.getElementById('bmi-cm').value) / 100;
+    } else {
+      w = parseFloat(document.getElementById('bmi-lbs').value) * 0.453592;
+      const ft = parseFloat(document.getElementById('bmi-ft').value) || 0;
+      const _in = parseFloat(document.getElementById('bmi-in').value) || 0;
+      h = ((ft * 12) + _in) * 0.0254;
+    }
+    
+    if (!w || !h || w <= 0 || h <= 0) return;
+    
+    const bmiVal = w / (h * h);
+    const shift = ((App.scores.v/tot) * -2.0) + ((App.scores.k/tot) * 2.5);
+    
+    const s_under = 16.0 + shift;
+    const under = 18.5 + shift;
+    const over = 25.0 + shift;
+    const obese = 30.0 + shift;
+
+    let state, sanskrit, color, advice;
+    if (bmiVal < s_under) {
+      state = "Severely Underweight"; sanskrit = "Atikarshya / Severe Dhatu Kshaya"; color = "#6b7280";
+      advice = dom === 'v' ? "Vata depletion requires deep, warm nourishment (ghee, root veg, cooked grains)." : "Aggressive tissue depletion detected. Strongly prioritize heavy, grounding foods.";
+    } else if (bmiVal < under) {
+      state = "Underweight"; sanskrit = "Karshya / Ama Deficiency"; color = "#3b82f6";
+      advice = dom === 'v' ? "This is common for Vata constitutions, but ensure you maintain internal strength. Add healthy fats to every meal." : "Below ideal weight for your body type. Focus on rebuilding tissues (Brimhana therapy).";
+    } else if (bmiVal < over) {
+      state = "Ideal / Balanced"; sanskrit = "Sama Agni"; color = "#10b981";
+      advice = "Your weight perfectly aligns with your Prakriti balance. Maintain your current daily rhythms.";
+    } else if (bmiVal < obese) {
+      state = "Overweight"; sanskrit = "Sthula / Ama Accumulation"; color = "#f59e0b";
+      advice = dom === 'k' ? "Kapha is naturally denser, but you are leaning past ideal. Increase daily movement and favor warm, spiced, light foods." : "Ama (toxins) may be accumulating. Favor fasting or lighter, easily digestible meals.";
+    } else {
+      state = "Obese"; sanskrit = "Atisthula / Medo Roga"; color = "#ef4444";
+      advice = "Significant tissue accumulation. Daily vigorous exercise (Vyayama) and strict Kapha-reducing diet recommended via practitioner.";
+    }
+
+    const output = document.getElementById('bmi-output');
+    output.style.display = 'block';
+    
+    // Bounds clamping for UI display rendering
+    const pctFill = Math.max(0, Math.min(100, (bmiVal / 40) * 100));
+    const idealLeft = Math.max(0, (under / 40) * 100);
+    const idealWidth = ((over - under) / 40) * 100;
+
+output.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:.5rem;">
+        <div>
+          <span style="font-size:2.2rem; font-weight:700; color:var(--ink); font-family:var(--font-heading); line-height:1">${bmiVal.toFixed(1)}</span>
+          <span style="font-size:.75rem; color:var(--ink3); text-transform:uppercase; letter-spacing:.1em; font-weight:700"> Standard BMI</span>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:.95rem; font-weight:700; color:${color}">${state}</div>
+          <div style="font-size:.7rem; font-style:italic; color:var(--ink3); margin-top:.2rem">${sanskrit}</div>
+        </div>
+      </div>
+      
+      <div style="height:10px; width:100%; border-radius:5px; background:var(--bg2); border:1px solid var(--border); position:relative; margin:2rem 0">
+        <!-- Ideal Zone -->
+        <div style="position:absolute; height:100%; left:${idealLeft}%; width:${idealWidth}%; background:rgba(16,185,129,0.15); border-left:2px solid #10b981; border-right:2px solid #10b981; border-radius:3px"></div>
+        <!-- Marker -->
+        <div style="position:absolute; top:-8px; bottom:-8px; width:4px; background:${color}; box-shadow:0 0 0 2px var(--surface); border-radius:2px; left:${pctFill}%; transition:left 0.5s ease-out">
+           <div style="position:absolute; top:-24px; left:-14px; width:32px; text-align:center; font-size:.65rem; font-weight:700; background:${color}; color:#fff; padding:3px 0; border-radius:4px">You</div>
+        </div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; font-size:.65rem; color:var(--ink3); font-weight:700; text-transform:uppercase; margin-top:-1.2rem; margin-bottom:1.2rem">
+        <span>< ${under.toFixed(1)}</span>
+        <span style="color:#10b981">Dosha Ideal Zone</span>
+        <span>> ${over.toFixed(1)}</span>
+      </div>
+      
+      <div style="background:var(--bg2); padding:1rem; border-radius:8px; border:1px solid var(--border); font-size:.85rem; color:var(--ink2); line-height:1.6">
+        <strong style="color:var(--ink); display:block; margin-bottom:0.2rem">Ayurvedic Insight</strong> 
+        ${advice}
+      </div>
+    `;
   });
 
   showScreen('screen-result');

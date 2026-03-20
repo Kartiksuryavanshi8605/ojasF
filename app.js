@@ -176,7 +176,7 @@ function startFromLanding() {
   App.log = [];
   App.currentQ = 0;
   App.locked = false;
-  startQuiz();
+  showExplainer();
 }
 
 /* ── Retake ── */
@@ -231,3 +231,39 @@ function clearSession() {
     startQuiz();
   }
 })();
+
+/* ── Inject SVGs into UI ── */
+document.addEventListener('DOMContentLoaded', () => {
+  const i = (id, svg) => { const el = document.getElementById(id); if (el) el.innerHTML = svg; };
+  i('icon-lotus-1', ICONS.lotus);
+  i('icon-lotus-2', ICONS.lotus);
+  i('icon-pill-v', ICONS.vata + ' Vata');
+  i('icon-pill-p', ICONS.pitta + ' Pitta');
+  i('icon-pill-k', ICONS.kapha + ' Kapha');
+  i('icon-exp-v', ICONS.vata);
+  i('icon-exp-p', ICONS.pitta);
+  i('icon-exp-k', ICONS.kapha);
+  i('icon-feat-classical', ICONS.classical);
+  i('icon-feat-search', ICONS.search);
+  i('icon-feat-diet', ICONS.diet);
+  i('icon-feat-rhythm', ICONS.rhythm);
+  i('icon-feat-imbalance', ICONS.imbalance);
+  i('dl-v', ICONS.vata + ' 0');
+  i('dl-p', ICONS.pitta + ' 0');
+  i('dl-k', ICONS.kapha + ' 0');
+});
+
+/* ── Explainer ── */
+function showExplainer() {
+  showScreen('screen-explainer');
+  // Trigger animations
+  setTimeout(() => {
+    document.querySelector('.explainer-content').classList.add('animate');
+  }, 50);
+}
+
+document.getElementById('btn-start-quiz').addEventListener('click', () => {
+  // Remove animation class for next time
+  document.querySelector('.explainer-content').classList.remove('animate');
+  startQuiz();
+});

@@ -10,14 +10,14 @@
   <link rel="apple-touch-icon" href="icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2" />
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════
        SCREEN 1 — LANDING
   ═══════════════════════════════════════ -->
-  <section id="screen-landing" class="screen active" aria-label="Landing">
+<section id="screen-landing" class="screen active" aria-label="Landing">
 
     <div class="land-bg" aria-hidden="true">
       <div class="land-orb land-orb--1"></div>
@@ -28,13 +28,13 @@
 
     <!-- Phase A: Splash -->
     <div class="land-splash" id="land-splash">
-      <div class="land-lotus" aria-hidden="true">🪷</div>
+      <div class="land-lotus" id="icon-lotus-1" aria-hidden="true"></div>
       <h1 class="brand-title">OJAS</h1>
       <p class="brand-sub">Prakriti Analyser</p>
       <div class="dosha-pills" aria-label="The three doshas">
-        <span class="pill pill--vata">💨 Vata</span>
-        <span class="pill pill--pitta">🔥 Pitta</span>
-        <span class="pill pill--kapha">🌿 Kapha</span>
+        <span class="pill pill--vata" id="icon-pill-v"></span>
+        <span class="pill pill--pitta" id="icon-pill-p"></span>
+        <span class="pill pill--kapha" id="icon-pill-k"></span>
       </div>
       <p class="land-desc">
         Rooted in <em>Charaka &amp; Sushruta Samhita</em>. 18 questions across
@@ -42,11 +42,11 @@
         breakdown, imbalance signs, diet, lifestyle &amp; daily rhythm.
       </p>
       <div class="land-features" aria-hidden="true">
-        <div class="feat"><span>📜</span><span>Classical</span></div>
-        <div class="feat"><span>🔍</span><span>Dual Dosha</span></div>
-        <div class="feat"><span>🥗</span><span>Diet</span></div>
-        <div class="feat"><span>🌅</span><span>Rhythm</span></div>
-        <div class="feat"><span>⚠️</span><span>Imbalance</span></div>
+        <div class="feat"><span id="icon-feat-classical" class="icon-holder"></span><span>Classical</span></div>
+        <div class="feat"><span id="icon-feat-search" class="icon-holder"></span><span>Dual Dosha</span></div>
+        <div class="feat"><span id="icon-feat-diet" class="icon-holder"></span><span>Diet</span></div>
+        <div class="feat"><span id="icon-feat-rhythm" class="icon-holder"></span><span>Rhythm</span></div>
+        <div class="feat"><span id="icon-feat-imbalance" class="icon-holder"></span><span>Imbalance</span></div>
       </div>
       <button class="btn btn--rose" id="btn-enter">Begin My Analysis →</button>
     </div>
@@ -55,7 +55,7 @@
     <div class="land-name-panel" id="land-name-panel" aria-hidden="true">
       <button class="name-back-btn" id="btn-name-back" aria-label="Back to splash">← Back</button>
       <div class="name-panel-inner">
-        <div class="name-lotus" aria-hidden="true">🪷</div>
+        <div class="name-lotus" id="icon-lotus-2" aria-hidden="true"></div>
         <h2 class="name-title">What's your name?</h2>
         <p class="name-sub">Your results will be personalised to you</p>
         <input
@@ -74,6 +74,41 @@
 
   </section>
 
+  <!-- ═══════════════════════════════════════
+       SCREEN 1.5 — EXPLAINER
+  ═══════════════════════════════════════ -->
+  <section id="screen-explainer" class="screen" aria-label="Dosha Explainer">
+    <div class="explainer-content">
+      <h2 class="explainer-title" id="explainer-title">Before we begin...</h2>
+      <p class="explainer-desc" id="explainer-desc">Your Prakriti is uniquely composed of three vital energies (Doshas).</p>
+      
+      <div class="explainer-doshas">
+        <div class="explainer-dosha" id="exp-vata">
+          <div class="explainer-icon" id="icon-exp-v"></div>
+          <div>
+            <h3>Vata</h3>
+            <p>Movement &amp; Creativity</p>
+          </div>
+        </div>
+        <div class="explainer-dosha" id="exp-pitta">
+          <div class="explainer-icon" id="icon-exp-p"></div>
+          <div>
+            <h3>Pitta</h3>
+            <p>Digestion &amp; Transformation</p>
+          </div>
+        </div>
+        <div class="explainer-dosha" id="exp-kapha">
+          <div class="explainer-icon" id="icon-exp-k"></div>
+          <div>
+            <h3>Kapha</h3>
+            <p>Structure &amp; Stability</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn btn--rose btn--full" id="btn-start-quiz" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease; max-width: 320px; margin: 2rem auto 0; display: block;">Reveal My Prakriti →</button>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════
        SCREEN 2 — QUIZ
@@ -83,9 +118,9 @@
     <div class="quiz-topbar">
       <span class="quiz-counter" id="quiz-counter" aria-live="polite">1 / 18</span>
       <div class="dosha-live" aria-label="Running dosha scores">
-        <span class="dlive dlive--v" id="dl-v">💨 0</span>
-        <span class="dlive dlive--p" id="dl-p">🔥 0</span>
-        <span class="dlive dlive--k" id="dl-k">🌿 0</span>
+        <span class="dlive dlive--v" id="dl-v">0</span>
+        <span class="dlive dlive--p" id="dl-p">0</span>
+        <span class="dlive dlive--k" id="dl-k">0</span>
       </div>
     </div>
 
@@ -105,7 +140,7 @@
       <div class="q-ghost q-ghost--1" aria-hidden="true"></div>
       <div class="q-card" id="q-card" role="main">
         <div class="q-meta">
-          <div class="q-icon-wrap" id="q-icon" aria-hidden="true">🌿</div>
+          <div class="q-icon-wrap" id="q-icon" aria-hidden="true"></div>
           <span class="q-category" id="q-category">Body</span>
         </div>
         <p class="q-text" id="q-text">Loading…</p>
@@ -142,8 +177,9 @@
   <!-- ─── Global UI ─── -->
   <button id="dark-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
 
-  <script src="app.js"></script>
-  <script src="quiz.js"></script>
-  <script src="result.js"></script>
+  <script src="icons.js?v=3"></script>
+  <script src="app.js?v=3"></script>
+  <script src="quiz.js?v=3"></script>
+  <script src="result.js?v=3"></script>
 </body>
 </html>
