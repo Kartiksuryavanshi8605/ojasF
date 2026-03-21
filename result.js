@@ -118,29 +118,40 @@ function buildResult() {
   function uid() { return 'tg' + (++_uid); }
 
   /* Tabbed card — single dosha gets plain card, dual gets tabs */
-  function dualCard(icon, title, singleBody, domBody, secBody) {
+  function dualCard(icon, title, singleBody, domBody, secBody, isOpen=false) {
+    const openAttr = isOpen ? 'open' : '';
     if (!isDual) {
       return `
-        <div class="ana-card">
-          <div class="card-head"><span class="card-icon">${icon}</span><h3 class="card-title">${title}</h3></div>
-          ${singleBody}
-        </div>`;
+        <details class="ana-card" name="ayurvedic-insights" ${openAttr}>
+          <summary class="card-head" style="cursor:pointer; list-style:none; margin-bottom:0; outline:none;">
+            <div style="display:flex;align-items:center;gap:.6rem;flex:1"><span class="card-icon">${icon}</span><h3 class="card-title">${title}</h3></div>
+            <span class="card-chevron" style="font-size:0.8rem;color:var(--ink3);">▼</span>
+          </summary>
+          <div class="card-body" style="padding-top:1.2rem;border-top:1px solid var(--border);margin-top:.8rem;">
+            ${singleBody}
+          </div>
+        </details>`;
     }
     const id = uid();
     return `
-      <div class="ana-card dual-tab-card" data-tg="${id}">
-        <div class="card-head"><span class="card-icon">${icon}</span><h3 class="card-title">${title}</h3></div>
-        <div class="dual-tabs" role="tablist">
-          <button class="dual-tab active" role="tab" aria-selected="true"  data-target="${id}-a">
-            ${d.icon} ${d.name} <span class="tab-pct">${domPct}%</span>
-          </button>
-          <button class="dual-tab"        role="tab" aria-selected="false" data-target="${id}-b">
-            ${s.icon} ${s.name} <span class="tab-pct">${secPct}%</span>
-          </button>
+      <details class="ana-card dual-tab-card" name="ayurvedic-insights" data-tg="${id}" ${openAttr}>
+        <summary class="card-head" style="cursor:pointer; list-style:none; margin-bottom:0; outline:none;">
+          <div style="display:flex;align-items:center;gap:.6rem;flex:1"><span class="card-icon">${icon}</span><h3 class="card-title">${title}</h3></div>
+          <span class="card-chevron" style="font-size:0.8rem;color:var(--ink3);">▼</span>
+        </summary>
+        <div class="card-body" style="padding-top:1.2rem;border-top:1px solid var(--border);margin-top:.8rem;">
+          <div class="dual-tabs" role="tablist" style="margin-top:0.2rem;">
+            <button class="dual-tab active" role="tab" aria-selected="true"  data-target="${id}-a">
+              ${d.icon} ${d.name} <span class="tab-pct">${domPct}%</span>
+            </button>
+            <button class="dual-tab"        role="tab" aria-selected="false" data-target="${id}-b">
+              ${s.icon} ${s.name} <span class="tab-pct">${secPct}%</span>
+            </button>
+          </div>
+          <div class="dual-panel active" id="${id}-a" role="tabpanel">${domBody}</div>
+          <div class="dual-panel"        id="${id}-b" role="tabpanel">${secBody}</div>
         </div>
-        <div class="dual-panel active" id="${id}-a" role="tabpanel">${domBody}</div>
-        <div class="dual-panel"        id="${id}-b" role="tabpanel">${secBody}</div>
-      </div>`;
+      </details>`;
   }
 
   /* Favour / Avoid columns */
@@ -208,7 +219,8 @@ function buildResult() {
     `Why This Is Your Prakriti${titleSuffix}`,
     `<p class="why-text">${d.why}</p>`,
     `<p class="why-text">${d.why}</p>`,
-    `<p class="why-text">${s.why}</p>`
+    `<p class="why-text">${s.why}</p>`,
+    true
   );
 
   const imbalanceCard = dualCard(
@@ -255,35 +267,45 @@ function buildResult() {
       <button class="btn-copy" id="btn-copy-url">Copy link</button>
     </div>
 
-    <div class="res-hero">${heroHTML}</div>
-
-    ${classicalNote}
-
-    <div class="breakdown">
-      <p class="breakdown-title">${ICONS.chart} Dosha Score Breakdown</p>
-      <div class="b-row">
-        <span class="b-label b-label--v">${ICONS.vata} Vata</span>
-        <div class="b-track"><div class="b-bar b-bar--v" id="bar-v" style="width:0%"></div></div>
-        <span class="b-pct">${bV}%</span>
-      </div>
-      <div class="b-row">
-        <span class="b-label b-label--p">${ICONS.pitta} Pitta</span>
-        <div class="b-track"><div class="b-bar b-bar--p" id="bar-p" style="width:0%"></div></div>
-        <span class="b-pct">${bP}%</span>
-      </div>
-      <div class="b-row">
-        <span class="b-label b-label--k">${ICONS.kapha} Kapha</span>
-        <div class="b-track"><div class="b-bar b-bar--k" id="bar-k" style="width:0%"></div></div>
-        <span class="b-pct">${bK}%</span>
-      </div>
-      <p style="font-size:.79rem;color:var(--ink3);margin-top:.75rem;line-height:1.65">
-        18 questions across <strong>Physical</strong> (Q1–6), <strong>Physiological</strong> (Q7–12) and
-        <strong>Psychological</strong> (Q13–18) — CCRAS/AYUSH validated Prakriti assessment framework.
-      </p>
+    <div class="res-tabs" role="tablist">
+      <button class="res-tab-btn active" data-target="tab-overview">📊 Overview</button>
+      <button class="res-tab-btn" data-target="tab-insights">🌿 Insights</button>
+      <button class="res-tab-btn" data-target="tab-tools">⚖️ Tools & Checks</button>
     </div>
 
-    <div class="ana-card" id="bmi-card">
-      <div class="card-head"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI</h3></div>
+    <div id="tab-overview" class="res-tab-panel active">
+      <div class="res-hero">${heroHTML}</div>
+
+      ${classicalNote}
+
+      <div class="breakdown">
+        <p class="breakdown-title">${ICONS.chart} Dosha Score Breakdown</p>
+        <div class="b-row">
+          <span class="b-label b-label--v">${ICONS.vata} Vata</span>
+          <div class="b-track"><div class="b-bar b-bar--v" id="bar-v" style="width:0%"></div></div>
+          <span class="b-pct">${bV}%</span>
+        </div>
+        <div class="b-row">
+          <span class="b-label b-label--p">${ICONS.pitta} Pitta</span>
+          <div class="b-track"><div class="b-bar b-bar--p" id="bar-p" style="width:0%"></div></div>
+          <span class="b-pct">${bP}%</span>
+        </div>
+        <div class="b-row">
+          <span class="b-label b-label--k">${ICONS.kapha} Kapha</span>
+          <div class="b-track"><div class="b-bar b-bar--k" id="bar-k" style="width:0%"></div></div>
+          <span class="b-pct">${bK}%</span>
+        </div>
+        <p style="font-size:.79rem;color:var(--ink3);margin-top:.75rem;line-height:1.65">
+          18 questions across <strong>Physical</strong> (Q1–6), <strong>Physiological</strong> (Q7–12) and
+          <strong>Psychological</strong> (Q13–18) — CCRAS/AYUSH validated Prakriti assessment framework.
+        </p>
+      </div>
+    </div>
+
+    <div id="tab-tools" class="res-tab-panel">
+
+    <div class="ana-card" id="bmi-card" style="margin-bottom:1.5rem; opacity:1; animation:none;">
+      <div class="card-head" style="margin-bottom:.9rem;"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI</h3></div>
       <p style="font-size:.82rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem">
         Standard BMI assumes all frames are identical. Ayurveda recognizes <strong>Vata</strong> is naturally lighter and <strong>Kapha</strong> is naturally denser. 
         Your unique Dosha shift adjusts your ideal weight zone by <strong style="color:var(--ink)">${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5) > 0 ? '+' : ''}${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5).toFixed(1)}</strong> points.
@@ -312,14 +334,25 @@ function buildResult() {
       <div id="bmi-output" style="display:none; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);"></div>
     </div>
 
-    ${whyCard}
-    ${imbalanceCard}
-    ${dietCard}
-    ${lifestyleCard}
-    ${exerciseCard}
-    ${rhythmCard}
-    ${herbCard}
-    ${seasonCard}
+    <!-- Food Checker Card Placeholder -->
+    <div class="ana-card" id="food-checker-card" style="margin-bottom:2rem; opacity:1; animation:none;"></div>
+
+    </div>
+
+    <div id="tab-insights" class="res-tab-panel">
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.65rem; color:var(--ink); margin:0 0 1.2rem; text-align:center; padding-bottom:.2rem;">
+        <span style="color:var(--gold); opacity: 0.6;">✦</span> Ayurvedic Insights <span style="color:var(--gold); opacity: 0.6;">✦</span>
+      </h2>
+
+      ${whyCard}
+      ${imbalanceCard}
+      ${dietCard}
+      ${lifestyleCard}
+      ${exerciseCard}
+      ${rhythmCard}
+      ${herbCard}
+      ${seasonCard}
+    </div>
 
     <p class="disclaimer">
       🪷 Based on Charaka Samhita and Sushruta Samhita — for educational awareness only, not medical diagnosis.
@@ -342,6 +375,18 @@ function buildResult() {
 
   /* ── Tab switching (event delegation — one listener for all cards) ── */
   document.getElementById('res-scroll').addEventListener('click', e => {
+    
+    // Top-level Dashboard Tab Switching
+    const dashboardTab = e.target.closest('.res-tab-btn');
+    if (dashboardTab) {
+      document.querySelectorAll('.res-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.res-tab-panel').forEach(panel => panel.classList.remove('active'));
+      dashboardTab.classList.add('active');
+      document.getElementById(dashboardTab.dataset.target).classList.add('active');
+      return; // Stop here, it was a dashboard tab
+    }
+
+    // Existing Insight Dual-Tab Switching
     const tab = e.target.closest('.dual-tab');
     if (!tab) return;
     const card    = tab.closest('.dual-tab-card');
@@ -483,5 +528,6 @@ output.innerHTML = `
     `;
   });
 
+  if (typeof initFoodChecker === 'function') initFoodChecker();
   showScreen('screen-result');
 }
