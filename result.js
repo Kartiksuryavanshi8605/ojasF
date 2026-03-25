@@ -215,7 +215,7 @@ function buildResult() {
   const titleSuffix = isDual ? ` — ${d.name} & ${s.name}` : '';
 
   const whyCard = dualCard(
-    `${ICONS.search}`,
+    ICONS.search,
     `Why This Is Your Prakriti${titleSuffix}`,
     `<p class="why-text">${d.why}</p>`,
     `<p class="why-text">${d.why}</p>`,
@@ -224,37 +224,37 @@ function buildResult() {
   );
 
   const imbalanceCard = dualCard(
-    `${ICONS.imbalance}`, `Signs of Imbalance${titleSuffix}`,
+    ICONS.imbalance, `Signs of Imbalance${titleSuffix}`,
     imbalGrid(d), imbalGrid(d), imbalGrid(s)
   );
 
   const dietCard = dualCard(
-    `${ICONS.diet}`, `Diet — Āhāra${titleSuffix}`,
+    ICONS.diet, `Diet — Āhāra${titleSuffix}`,
     paCols(d.foods), paCols(d.foods), paCols(s.foods)
   );
 
   const lifestyleCard = dualCard(
-    `${ICONS.rhythm}`, `Lifestyle — Vihāra${titleSuffix}`,
+    ICONS.rhythm, `Lifestyle — Vihāra${titleSuffix}`,
     paCols(d.lifestyle), paCols(d.lifestyle), paCols(s.lifestyle)
   );
 
   const exerciseCard = dualCard(
-    `${ICONS.exercise}`, `Exercise — Vyāyāma${titleSuffix}`,
+    ICONS.exercise, `Exercise — Vyāyāma${titleSuffix}`,
     paCols(d.exercise), paCols(d.exercise), paCols(s.exercise)
   );
 
   const rhythmCard = dualCard(
-    `${ICONS.rhythm}`, `Daily Rhythm — Dinacharya${titleSuffix}`,
+    ICONS.rhythm, `Daily Rhythm — Dinacharya${titleSuffix}`,
     rhythmPanel(d), rhythmPanel(d), rhythmPanel(s)
   );
 
   const herbCard = dualCard(
-    `${ICONS.kapha}`, `Classical Herbs — Dravyaguna${titleSuffix}`,
+    ICONS.kapha, `Classical Herbs — Dravyaguna${titleSuffix}`,
     herbPanel(d), herbPanel(d), herbPanel(s)
   );
 
   const seasonCard = dualCard(
-    `${ICONS.season}`, `Seasonal Guidance — Ritucharya${titleSuffix}`,
+    ICONS.season, `Seasonal Guidance — Ritucharya${titleSuffix}`,
     seasonPanel(d), seasonPanel(d), seasonPanel(s)
   );
 
