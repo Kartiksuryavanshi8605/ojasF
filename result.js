@@ -5,32 +5,32 @@
 ═══════════════════════════════════════════════════════ */
 
 function buildResult() {
-  const tot    = QUESTIONS.length;
+  const tot = QUESTIONS.length;
   const sorted = Object.entries(App.scores).sort((a, b) => b[1] - a[1]);
-  const dom    = sorted[0][0];
-  const sec    = sorted[1][0];
+  const dom = sorted[0][0];
+  const sec = sorted[1][0];
   const domPct = Math.round((sorted[0][1] / tot) * 100);
   const secPct = Math.round((sorted[1][1] / tot) * 100);
   const isDual = secPct >= 28;
-  const d      = DOSHA[dom];
-  const s      = DOSHA[sec];
+  const d = DOSHA[dom];
+  const s = DOSHA[sec];
 
   // Persist
   localStorage.setItem('ojasPrakriti', dom);
-  localStorage.setItem('ojasScores',   JSON.stringify(App.scores));
-  localStorage.setItem('ojasName',     App.name);
+  localStorage.setItem('ojasScores', JSON.stringify(App.scores));
+  localStorage.setItem('ojasName', App.name);
 
   // Theme result screen by dominant dosha
   const screen = document.getElementById('screen-result');
   screen.className = 'screen active ' + d.themeClass;
-  ['res-bg--vata','res-bg--pitta','res-bg--kapha'].forEach(c => screen.classList.remove(c));
+  ['res-bg--vata', 'res-bg--pitta', 'res-bg--kapha'].forEach(c => screen.classList.remove(c));
   screen.classList.add(d.bgClass);
 
   const bV = Math.round((App.scores.v / tot) * 100);
   const bP = Math.round((App.scores.p / tot) * 100);
   const bK = Math.round((App.scores.k / tot) * 100);
 
-  const names = { v:'Vata', p:'Pitta', k:'Kapha' };
+  const names = { v: 'Vata', p: 'Pitta', k: 'Kapha' };
   const icons = { v: ICONS.vata, p: ICONS.pitta, k: ICONS.kapha };
 
   const shareURL = `${location.href.split('#')[0]}#r/${dom}/${App.scores.v}-${App.scores.p}-${App.scores.k}/${encodeURIComponent(App.name)}`;
@@ -57,13 +57,13 @@ function buildResult() {
       Each section below shows guidance for <em>both</em> — switch tabs to see each dosha's recommendations.
     </p>
     <div class="score-row">
-      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
-      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
-      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
+      <span class="sc sc--v ${dom === 'v' ? 'sc--dominant' : ''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
+      <span class="sc sc--p ${dom === 'p' ? 'sc--dominant' : ''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
+      <span class="sc sc--k ${dom === 'k' ? 'sc--dominant' : ''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
     </div>
     <div class="traits">
-      ${d.traits.map(t=>`<span class="trait ${d.traitClass}">${t}</span>`).join('')}
-      ${s.traits.slice(0,3).map(t=>`<span class="trait ${s.traitClass}" style="opacity:.65">${t}</span>`).join('')}
+      ${d.traits.map(t => `<span class="trait ${d.traitClass}">${t}</span>`).join('')}
+      ${s.traits.slice(0, 3).map(t => `<span class="trait ${s.traitClass}" style="opacity:.65">${t}</span>`).join('')}
     </div>
     <div class="dual-desc-grid">
       <div class="dual-desc-card dual-desc-card--dom">
@@ -91,12 +91,12 @@ function buildResult() {
     </p>
     <p style="color:var(--ink2);font-size:.9rem;line-height:1.85;max-width:500px;margin:.5rem auto">${d.desc}</p>
     <div class="score-row">
-      <span class="sc sc--v ${dom==='v'?'sc--dominant':''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
-      <span class="sc sc--p ${dom==='p'?'sc--dominant':''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
-      <span class="sc sc--k ${dom==='k'?'sc--dominant':''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
+      <span class="sc sc--v ${dom === 'v' ? 'sc--dominant' : ''}">${ICONS.vata} Vata ${App.scores.v}/${tot}</span>
+      <span class="sc sc--p ${dom === 'p' ? 'sc--dominant' : ''}">${ICONS.pitta} Pitta ${App.scores.p}/${tot}</span>
+      <span class="sc sc--k ${dom === 'k' ? 'sc--dominant' : ''}">${ICONS.kapha} Kapha ${App.scores.k}/${tot}</span>
     </div>
     <div class="traits">
-      ${d.traits.map(t=>`<span class="trait ${d.traitClass}">${t}</span>`).join('')}
+      ${d.traits.map(t => `<span class="trait ${d.traitClass}">${t}</span>`).join('')}
     </div>
   `;
 
@@ -118,7 +118,7 @@ function buildResult() {
   function uid() { return 'tg' + (++_uid); }
 
   /* Tabbed card — single dosha gets plain card, dual gets tabs */
-  function dualCard(icon, title, singleBody, domBody, secBody, isOpen=false) {
+  function dualCard(icon, title, singleBody, domBody, secBody, isOpen = false) {
     const openAttr = isOpen ? 'open' : '';
     if (!isDual) {
       return `
@@ -155,61 +155,71 @@ function buildResult() {
   }
 
   /* Favour / Avoid columns */
-  function paCols(fd) { return `
+  function paCols(fd) {
+    return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65"><strong>Principle:</strong> ${fd.principle}</p>
     <div class="pa-cols">
-      <div class="pa-col favour"><h4>✓ Favour</h4><ul class="pa-list">${fd.prefer.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-      <div class="pa-col avoid"><h4>✕ Reduce / Avoid</h4><ul class="pa-list">${fd.avoid.map(i=>`<li>${i}</li>`).join('')}</ul></div>
-    </div>`; }
+      <div class="pa-col favour"><h4>✓ Favour</h4><ul class="pa-list">${fd.prefer.map(i => `<li>${i}</li>`).join('')}</ul></div>
+      <div class="pa-col avoid"><h4>✕ Reduce / Avoid</h4><ul class="pa-list">${fd.avoid.map(i => `<li>${i}</li>`).join('')}</ul></div>
+    </div>`;
+  }
 
   /* Imbalance grid */
-  function imbalGrid(dosha) { return `
+  function imbalGrid(dosha) {
+    return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65">
       When <strong>${dosha.name}</strong> becomes aggravated these are the early warning signs to watch for.
     </p>
-    <div class="imbalance-grid">${dosha.imbalance.map(i=>`<div class="ib-tag">${i}</div>`).join('')}</div>`; }
+    <div class="imbalance-grid">${dosha.imbalance.map(i => `<div class="ib-tag">${i}</div>`).join('')}</div>`;
+  }
 
   /* Rhythm panel */
-  function rhythmPanel(dosha) { return `
+  function rhythmPanel(dosha) {
+    return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65">
       Aligning your day to the dosha clock (Kapha 6–10, Pitta 10–2, Vata 2–6) is one of Ayurveda's most powerful practices.
     </p>
     <div class="rhythm-row">
-      ${dosha.rhythm.map(r=>`
+      ${dosha.rhythm.map(r => `
         <div class="rhythm-item">
           <div class="rhythm-time">${r.time}</div>
           <div class="rhythm-action">${r.action}</div>
         </div>`).join('')}
-    </div>`; }
+    </div>`;
+  }
 
   /* Herb grid */
-  function herbPanel(dosha) { return `
+  function herbPanel(dosha) {
+    return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65">
       These herbs have been used for centuries to balance <strong>${dosha.name}</strong> dosha.
       Always consult a qualified Vaidya before starting any herbal protocol.
     </p>
     <div class="herb-grid">
-      ${dosha.herbs.map(h=>`
+      ${dosha.herbs.map(h => `
         <div class="herb-card">
           <div class="herb-name">${h.icon} ${h.name}</div>
           <div class="herb-sanskrit">${h.sanskrit}</div>
           <div class="herb-use">${h.use}</div>
         </div>`).join('')}
-    </div>`; }
+    </div>`;
+  }
 
   /* Season grid */
-  function seasonPanel(dosha) { return `
+  function seasonPanel(dosha) {
+    return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65">
       Your <strong>${dosha.name}</strong> side requires specific seasonal adjustments to stay balanced year-round.
     </p>
     <div class="season-grid">
-      ${dosha.seasons.map(ss=>`
-        <div class="season-card ${ss.active?'active-season':''}">
+      ${dosha.seasons.map(ss => `
+        <div class="season-card ${ss.active ? 'active-season' : ''}">
           <div class="season-icon">${ss.icon}</div>
           <div class="season-name">${ss.name}</div>
           <div class="season-tip">${ss.tip}</div>
         </div>`).join('')}
-    </div>`; }
+    </div>`;
+  }
 
   /* ── Build each section ── */
   const titleSuffix = isDual ? ` — ${d.name} & ${s.name}` : '';
@@ -303,35 +313,102 @@ function buildResult() {
     </div>
 
     <div id="tab-tools" class="res-tab-panel">
-
     <div class="ana-card" id="bmi-card" style="margin-bottom:1.5rem; opacity:1; animation:none;">
-      <div class="card-head" style="margin-bottom:.9rem;"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI</h3></div>
+      <div class="card-head" style="margin-bottom:.9rem;"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI & Health</h3></div>
+      
       <p style="font-size:.82rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem">
-        Standard BMI assumes all frames are identical. Ayurveda recognizes <strong>Vata</strong> is naturally lighter and <strong>Kapha</strong> is naturally denser. 
-        Your unique Dosha shift adjusts your ideal weight zone by <strong style="color:var(--ink)">${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5) > 0 ? '+' : ''}${((App.scores.v/tot)*-2.0 + (App.scores.k/tot)*2.5).toFixed(1)}</strong> points.
+        Enhanced with <strong>Age</strong>, <strong>Gender</strong>, and <strong>Frame Analysis</strong> for clinical accuracy.
+        Your unique Dosha shift adjusts your ideal weight zone by <strong style="color:var(--ink)">${((App.scores.v / tot) * -2.0 + (App.scores.k / tot) * 2.5) > 0 ? '+' : ''}${((App.scores.v / tot) * -2.0 + (App.scores.k / tot) * 2.5).toFixed(1)}</strong> points.
       </p>
       
-      <div style="display:flex; gap:10px; margin-bottom:1rem; border:1px solid var(--border); padding:.25rem; border-radius:8px; background:var(--bg2)">
-        <button id="btn-bmi-metric" style="flex:1; padding:.4rem; border-radius:6px; border:none; background:var(--surface); font-size:.75rem; font-weight:700; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.05); transition:all 0.2s">Metric</button>
-        <button id="btn-bmi-imperial" style="flex:1; padding:.4rem; border-radius:6px; border:none; background:transparent; color:var(--ink3); font-size:.75rem; font-weight:700; cursor:pointer; transition:all 0.2s">Imperial</button>
+      <div class="pill-tabs" style="width:100%; margin-bottom:1.2rem">
+        <button id="btn-bmi-metric" class="pill-tab active" style="flex:1">Metric</button>
+        <button id="btn-bmi-imperial" class="pill-tab" style="flex:1">Imperial</button>
       </div>
       
-      <div id="bmi-inputs-metric" style="display:flex; gap:10px; margin-bottom:1rem;">
-        <input type="number" id="bmi-kg" placeholder="Weight (kg)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
-        <input type="number" id="bmi-cm" placeholder="Height (cm)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
-      </div>
-
-      <div id="bmi-inputs-imperial" style="display:none; flex-direction:column; gap:10px; margin-bottom:1rem;">
-        <input type="number" id="bmi-lbs" placeholder="Weight (lbs)" style="padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
-        <div style="display:flex; gap:10px">
-          <input type="number" id="bmi-ft" placeholder="Height (ft)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
-          <input type="number" id="bmi-in" placeholder="Height (in)" style="flex:1; padding:.75rem; border:1px solid var(--border); border-radius:8px; font-size:.9rem; background:var(--surface); color:var(--ink)">
+      <!-- Frictionless Home Profile -->
+      <div class="bmi-input-grid">
+        <div class="bmi-field-group">
+          <label class="bmi-label">Age</label>
+          <input type="number" id="bmi-age" class="bmi-input" placeholder="Years">
+        </div>
+        <div class="bmi-field-group">
+          <label class="bmi-label">Gender</label>
+          <select id="bmi-gender" class="bmi-input bmi-select">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="bmi-field-group--full">
+          <label class="bmi-label">Physical Activity Level</label>
+          <select id="bmi-activity" class="bmi-input bmi-select">
+            <option value="1.2">Sedentary (Office job / No exercise)</option>
+            <option value="1.375">Light (1-3 days/week exercise)</option>
+            <option value="1.55" selected>Moderate (3-5 days/week exercise)</option>
+            <option value="1.725">Active (6-7 days/week exercise)</option>
+            <option value="1.9">Vigorous (Physical job / Athlete)</option>
+          </select>
         </div>
       </div>
 
-      <button class="btn btn--gold btn--full" id="btn-calc-bmi">Calculate Corrected BMI</button>
+      <!-- Weight & Height Group -->
+      <div id="bmi-inputs-metric" class="bmi-input-grid" style="margin-top: 0.5rem">
+        <div class="bmi-field-group">
+          <label class="bmi-label">Weight (kg)</label>
+          <input type="number" id="bmi-kg" class="bmi-input" placeholder="0.0">
+        </div>
+        <div class="bmi-field-group">
+          <label class="bmi-label">Height (cm)</label>
+          <input type="number" id="bmi-cm" class="bmi-input" placeholder="0">
+        </div>
+      </div>
+
+      <div id="bmi-inputs-imperial" class="bmi-input-grid" style="display:none; margin-top: 0.5rem">
+        <div class="bmi-field-group--full">
+          <label class="bmi-label">Weight (lbs)</label>
+          <input type="number" id="bmi-lbs" class="bmi-input" placeholder="0.0">
+        </div>
+        <div class="bmi-field-group">
+          <label class="bmi-label">Height (ft)</label>
+          <input type="number" id="bmi-ft" class="bmi-input" placeholder="ft">
+        </div>
+        <div class="bmi-field-group">
+          <label class="bmi-label">Height (in)</label>
+          <input type="number" id="bmi-in" class="bmi-input" placeholder="in">
+        </div>
+      </div>
+
+      <!-- Extra Accuracy Section (Hidden by Default) -->
+      <div style="margin-top:1rem">
+        <button id="btn-toggle-advanced-bmi" style="background:transparent; border:none; color:var(--ink4); font-size:0.7rem; font-weight:700; text-transform:uppercase; cursor:pointer; display:flex; align-items:center; gap:5px; padding:0">
+          <span>⚙️ Extra Accuracy (Requires Tape Measure)</span>
+        </button>
+        <div id="bmi-advanced-inputs" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px dashed var(--border)">
+          <div class="bmi-input-grid">
+            <div class="bmi-field-group">
+              <label class="bmi-label">Wrist (cm)</label>
+              <input type="number" id="bmi-wrist" class="bmi-input" placeholder="Frame">
+            </div>
+            <div class="bmi-field-group">
+              <label class="bmi-label">Waist (cm)</label>
+              <input type="number" id="bmi-waist" class="bmi-input" placeholder="Belly">
+            </div>
+            <div class="bmi-field-group">
+              <label class="bmi-label">Neck (cm)</label>
+              <input type="number" id="bmi-neck" class="bmi-input" placeholder="Neck">
+            </div>
+            <div class="bmi-field-group" id="bmi-hip-group" style="display:none">
+              <label class="bmi-label">Hips (cm)</label>
+              <input type="number" id="bmi-hip" class="bmi-input" placeholder="Hips">
+            </div>
+          </div>
+          <p style="font-size:0.65rem; color:var(--ink4); margin-top:0.5rem">Used for Body Fat % and precise Frame Classification.</p>
+        </div>
+      </div>
+
+      <button class="btn btn--gold btn--full" id="btn-calc-bmi" style="margin-top:1rem">ANALYSE HEALTH METRICS</button>
       
-      <div id="bmi-output" style="display:none; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);"></div>
+      <div id="bmi-output" style="display:none; margin-top:1rem;"></div>
     </div>
 
     <!-- Food Checker Card Placeholder -->
@@ -375,7 +452,7 @@ function buildResult() {
 
   /* ── Tab switching (event delegation — one listener for all cards) ── */
   document.getElementById('res-scroll').addEventListener('click', e => {
-    
+
     // Top-level Dashboard Tab Switching
     const dashboardTab = e.target.closest('.res-tab-btn');
     if (dashboardTab) {
@@ -389,7 +466,7 @@ function buildResult() {
     // Existing Insight Dual-Tab Switching
     const tab = e.target.closest('.dual-tab');
     if (!tab) return;
-    const card    = tab.closest('.dual-tab-card');
+    const card = tab.closest('.dual-tab-card');
     const targetId = tab.dataset.target;
     card.querySelectorAll('.dual-tab').forEach(t => {
       t.classList.remove('active');
@@ -416,37 +493,83 @@ function buildResult() {
     });
   });
 
-  /* ── BMI Calculator Bindings ── */
+  /* ── BMI & Health Profiler Bindings ── */
   let isMetric = true;
-  document.getElementById('btn-bmi-metric').addEventListener('click', e => {
-    isMetric = true;
-    e.target.style.background = 'var(--surface)';
-    e.target.style.color = 'var(--ink)';
-    e.target.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-    const imp = document.getElementById('btn-bmi-imperial');
-    imp.style.background = 'transparent';
-    imp.style.color = 'var(--ink3)';
-    imp.style.boxShadow = 'none';
-    document.getElementById('bmi-inputs-metric').style.display = 'flex';
-    document.getElementById('bmi-inputs-imperial').style.display = 'none';
-    document.getElementById('bmi-output').style.display = 'none';
-  });
-  
-  document.getElementById('btn-bmi-imperial').addEventListener('click', e => {
-    isMetric = false;
-    e.target.style.background = 'var(--surface)';
-    e.target.style.color = 'var(--ink)';
-    e.target.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
-    const met = document.getElementById('btn-bmi-metric');
-    met.style.background = 'transparent';
-    met.style.color = 'var(--ink3)';
-    met.style.boxShadow = 'none';
-    document.getElementById('bmi-inputs-metric').style.display = 'none';
-    document.getElementById('bmi-inputs-imperial').style.display = 'flex';
-    document.getElementById('bmi-output').style.display = 'none';
+  const bmiInpGroup = ['age', 'gender', 'kg', 'cm', 'lbs', 'ft', 'in', 'wrist', 'waist', 'neck', 'hip'];
+
+  // Persistence Loading
+  bmiInpGroup.forEach(id => {
+    const val = localStorage.getItem(`ojas_bmi_${id}`);
+    const el = document.getElementById(`bmi-${id}`);
+    if (val && el) el.value = val;
   });
 
+  // Gender Change -> Show Hip for female
+  const genderEl = document.getElementById('bmi-gender');
+  const hipGrp = document.getElementById('bmi-hip-group');
+  const toggleHip = () => { if (hipGrp) hipGrp.style.display = genderEl.value === 'female' ? 'flex' : 'none'; };
+  if (genderEl) {
+    genderEl.addEventListener('change', () => {
+      toggleHip();
+      localStorage.setItem('ojas_bmi_gender', genderEl.value);
+    });
+    toggleHip();
+  }
+
+  // Save inputs on change
+  bmiInpGroup.forEach(id => {
+    const el = document.getElementById(`bmi-${id}`);
+    if (el) el.addEventListener('input', () => localStorage.setItem(`ojas_bmi_${id}`, el.value));
+  });
+
+  const btnMet = document.getElementById('btn-bmi-metric');
+  const btnImp = document.getElementById('btn-bmi-imperial');
+  const inpMet = document.getElementById('bmi-inputs-metric');
+  const inpImp = document.getElementById('bmi-inputs-imperial');
+
+  const setUnit = (m) => {
+    isMetric = m;
+    if (btnMet) btnMet.className = `pill-tab ${m ? 'active' : ''}`;
+    if (btnImp) btnImp.className = `pill-tab ${!m ? 'active' : ''}`;
+    if (inpMet) inpMet.style.display = m ? 'grid' : 'none';
+    if (inpImp) inpImp.style.display = !m ? 'grid' : 'none';
+    const out = document.getElementById('bmi-output');
+    if (out) out.style.display = 'none';
+  };
+
+  if (btnMet) btnMet.addEventListener('click', () => setUnit(true));
+  if (btnImp) btnImp.addEventListener('click', () => setUnit(false));
+
+  // Toggle Advanced Section
+  const btnToggleAdv = document.getElementById('btn-toggle-advanced-bmi');
+  const advSection = document.getElementById('bmi-advanced-inputs');
+  if (btnToggleAdv && advSection) {
+    btnToggleAdv.addEventListener('click', () => {
+      const isHidden = advSection.style.display === 'none';
+      advSection.style.display = isHidden ? 'block' : 'none';
+      btnToggleAdv.querySelector('span').textContent = isHidden 
+        ? '✕ Hide Extra Accuracy' 
+        : '⚙️ Extra Accuracy (Requires Tape Measure)';
+    });
+  }
+
+  // Init Save Persistence for Activity
+  const actEl = document.getElementById('bmi-activity');
+  if (actEl) {
+    const savedAct = localStorage.getItem('ojas_bmi_activity');
+    if (savedAct) actEl.value = savedAct;
+    actEl.addEventListener('change', () => localStorage.setItem('ojas_bmi_activity', actEl.value));
+  }
+
   document.getElementById('btn-calc-bmi').addEventListener('click', () => {
+    const age = parseInt(document.getElementById('bmi-age').value) || 30;
+    const gender = document.getElementById('bmi-gender').value;
+    const activity = parseFloat(document.getElementById('bmi-activity').value) || 1.55;
+    const wrist = parseFloat(document.getElementById('bmi-wrist').value) || 0;
+    const waist = parseFloat(document.getElementById('bmi-waist').value) || 0;
+    const neck = parseFloat(document.getElementById('bmi-neck').value) || 0;
+    const hip = parseFloat(document.getElementById('bmi-hip').value) || 0;
+
     let w, h;
     if (isMetric) {
       w = parseFloat(document.getElementById('bmi-kg').value);
@@ -457,77 +580,236 @@ function buildResult() {
       const _in = parseFloat(document.getElementById('bmi-in').value) || 0;
       h = ((ft * 12) + _in) * 0.0254;
     }
-    
+
     if (!w || !h || w <= 0 || h <= 0) return;
-    
+
     const bmiVal = w / (h * h);
-    const shift = ((App.scores.v/tot) * -2.0) + ((App.scores.k/tot) * 2.5);
-    
-    const s_under = 16.0 + shift;
+    const h_cm = h * 100;
+
+    // Determine dominant dosha for advice
+    const tot = App.scores.v + App.scores.p + App.scores.k;
+    let dom = 'v'; // Default to Vata
+    if (App.scores.p > App.scores.v && App.scores.p > App.scores.k) dom = 'p';
+    else if (App.scores.k > App.scores.v && App.scores.k > App.scores.p) dom = 'k';
+
+    // 1. BMI Status with Dosha Shift
+    const shift = ((App.scores.v / tot) * -2.0) + ((App.scores.k / tot) * 2.5);
     const under = 18.5 + shift;
     const over = 25.0 + shift;
     const obese = 30.0 + shift;
 
-    let state, sanskrit, color, advice;
-    if (bmiVal < s_under) {
-      state = "Severely Underweight"; sanskrit = "Atikarshya / Severe Dhatu Kshaya"; color = "#6b7280";
-      advice = dom === 'v' ? "Vata depletion requires deep, warm nourishment (ghee, root veg, cooked grains)." : "Aggressive tissue depletion detected. Strongly prioritize heavy, grounding foods.";
-    } else if (bmiVal < under) {
-      state = "Underweight"; sanskrit = "Karshya / Ama Deficiency"; color = "#3b82f6";
-      advice = dom === 'v' ? "This is common for Vata constitutions, but ensure you maintain internal strength. Add healthy fats to every meal." : "Below ideal weight for your body type. Focus on rebuilding tissues (Brimhana therapy).";
-    } else if (bmiVal < over) {
-      state = "Ideal / Balanced"; sanskrit = "Sama Agni"; color = "#10b981";
-      advice = "Your weight perfectly aligns with your Prakriti balance. Maintain your current daily rhythms.";
-    } else if (bmiVal < obese) {
-      state = "Overweight"; sanskrit = "Sthula / Ama Accumulation"; color = "#f59e0b";
-      advice = dom === 'k' ? "Kapha is naturally denser, but you are leaning past ideal. Increase daily movement and favor warm, spiced, light foods." : "Ama (toxins) may be accumulating. Favor fasting or lighter, easily digestible meals.";
-    } else {
-      state = "Obese"; sanskrit = "Atisthula / Medo Roga"; color = "#ef4444";
-      advice = "Significant tissue accumulation. Daily vigorous exercise (Vyayama) and strict Kapha-reducing diet recommended via practitioner.";
+    let state, color, advice, sanskrit;
+    if (bmiVal < (16 + shift)) { state = "Severely Underweight"; sanskrit = "Atikarshya"; color = "#6b7280"; }
+    else if (bmiVal < under) { state = "Underweight"; sanskrit = "Karshya"; color = "#3b82f6"; }
+    else if (bmiVal < over) { state = "Balanced"; sanskrit = "Sama Agni"; color = "#10b981"; }
+    else if (bmiVal < obese) { state = "Overweight"; sanskrit = "Sthula"; color = "#f59e0b"; }
+    else { state = "Obese"; sanskrit = "Atisthula"; color = "#ef4444"; }
+
+    // Activity-Aware Activity Logic
+    const isSedentary = activity <= 1.25;
+    const isActive = activity >= 1.7;
+    
+    if (dom === 'k') { // Kapha
+      if (bmiVal >= over) {
+        advice = isSedentary 
+          ? "Sedentary Kapha with tissue accumulation has very high risk of Ama (toxins). Prioritize pungent/bitter foods and vigorous daily movement." 
+          : "Kapha is naturally denser, but you are leaning past ideal. Maintain your activity level and favor warm, spiced, light foods.";
+      } else {
+        advice = "Your Kapha constitution is well-balanced. Maintain your current activity to prevent heaviness and stagnation.";
+      }
+    } else if (dom === 'v') { // Vata
+      if (bmiVal < under) {
+        advice = isActive 
+          ? "Active Vata with low weight needs to caution against over-exhaustion. Prioritize warm, heavy, grounding meals and restorative rest." 
+          : "Vata is naturally lighter, but ensure you maintain internal strength. Add healthy fats like Ghee to every meal.";
+      } else {
+        advice = "Balanced Vata energy. Maintain grounding routines and consistent sleep cycles to keep your light energy stable.";
+      }
+    } else { // Pitta
+      if (bmiVal >= over) {
+        advice = isSedentary 
+          ? "Sedentary Pitta may experience irritability or heat buildup. Prioritize cooling foods and structured physical discipline." 
+          : "Strong Pitta fire helps metabolic speed, but watch for internal heat. Balance your activity with cooling Sitala practices.";
+      } else {
+        advice = "Balanced Pitta. Your metabolic fire (Agni) is functioning optimally. Continue seasonal cooling routines.";
+      }
     }
 
-    const output = document.getElementById('bmi-output');
-    output.style.display = 'block';
-    
-    // Bounds clamping for UI display rendering
-    const pctFill = Math.max(0, Math.min(100, (bmiVal / 40) * 100));
-    const idealLeft = Math.max(0, (under / 40) * 100);
-    const idealWidth = ((over - under) / 40) * 100;
+    // 2. Body Fat % (Navy Method - Optional)
+    let bf = 0;
+    if (waist && neck && h_cm) {
+      if (gender === 'male') {
+        const diff = waist - neck;
+        if (diff > 0) bf = 495 / (1.0324 - 0.19077 * Math.log10(diff) + 0.15456 * Math.log10(h_cm)) - 450;
+      } else if (hip) {
+        const diff = waist + hip - neck;
+        if (diff > 0) bf = 495 / (1.29579 - 0.35004 * Math.log10(diff) + 0.221 * Math.log10(h_cm)) - 450;
+      }
+    }
+    // Fallback if tape measure missing: Deurenberg BMI formula
+    if (!bf || bf < 2) {
+      const gVal = gender === 'male' ? 1 : 0;
+      bf = (1.20 * bmiVal) + (0.23 * age) - (10.8 * gVal) - 5.4;
+    }
+    if (bf < 0) bf = 0;
 
-output.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:.5rem;">
-        <div>
-          <span style="font-size:2.2rem; font-weight:700; color:var(--ink); font-family:var(--font-heading); line-height:1">${bmiVal.toFixed(1)}</span>
-          <span style="font-size:.75rem; color:var(--ink3); text-transform:uppercase; letter-spacing:.1em; font-weight:700"> Standard BMI</span>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:.95rem; font-weight:700; color:${color}">${state}</div>
-          <div style="font-size:.7rem; font-style:italic; color:var(--ink3); margin-top:.2rem">${sanskrit}</div>
+    // 3. BMR (Mifflin-St Jeor) & TDEE
+    const bmr = (gender === 'male')
+      ? (10 * w) + (6.25 * h_cm) - (5 * age) + 5
+      : (10 * w) + (6.25 * h_cm) - (5 * age) - 161;
+    const tdee = bmr * activity;
+
+    // 4. Frame Classifier (Wrist - Optional)
+    let frame = "Medium";
+    if (wrist > 0) {
+      const ratio = h_cm / wrist;
+      if (gender === 'male') {
+        if (ratio > 10.4) frame = "Small"; else if (ratio < 9.6) frame = "Large";
+      } else {
+        if (ratio > 11.0) frame = "Small"; else if (ratio < 10.1) frame = "Large";
+      }
+    } else {
+      // Logic fallback based on dominant dosha
+      frame = dom === 'v' ? 'Small' : dom === 'k' ? 'Large' : 'Medium';
+    }
+
+    // 5. Waist-to-Height Ratio
+    const wthr = waist ? (waist / h_cm) : 0;
+
+    // 6. Goal Weight
+    const targetWeight = ((under + over) / 2) * (h * h);
+    const weightDiff = w - targetWeight;
+    const goalText = weightDiff > 0.5
+      ? `Lose <strong>${weightDiff.toFixed(1)} kg</strong> to reach optimal balance.`
+      : weightDiff < -0.5
+        ? `Gain <strong>${Math.abs(weightDiff).toFixed(1)} kg</strong> to nourish tissues (Brimhana).`
+        : "You are currently within your ideal Prakriti zone.";
+
+    const out = document.getElementById('bmi-output');
+    out.style.display = 'block';
+
+    const angle = ((Math.min(40, Math.max(10, bmiVal)) - 10) / 30) * 180 - 90;
+
+    // History Loading
+    const history = JSON.parse(localStorage.getItem('ojas_weight_history') || '[]');
+    const historyHTML = history.length > 0
+      ? `<div style="margin-top:0.5rem; font-size:0.75rem">Recent Logs: ${history.map(h => `<span style="display:inline-block; background:var(--bg3); padding:2px 6px; border-radius:4px; margin:2px">${h.date}: ${h.weight}kg</span>`).join('')}</div>`
+      : 'No recent logs found.';
+
+    out.innerHTML = `
+      <div class="gauge-container">
+        <svg class="gauge-svg" viewBox="0 0 200 120">
+          <path class="gauge-track" d="M 20 100 A 80 80 0 0 1 180 100" />
+          <path id="gauge-fill" class="gauge-segment" d="M 20 100 A 80 80 0 0 1 180 100" stroke="${color}" stroke-dasharray="0, 100" pathLength="100" />
+          <path id="gauge-needle" class="gauge-needle" d="M 100 100 L 96 100 L 100 25 L 104 100 Z" style="transform: rotate(-90deg)" />
+        </svg>
+        <div class="gauge-value">
+          <span class="gauge-num">${bmiVal.toFixed(1)}</span>
+          <span class="gauge-label">${state}</span>
         </div>
       </div>
-      
-      <div style="height:10px; width:100%; border-radius:5px; background:var(--bg2); border:1px solid var(--border); position:relative; margin:2rem 0">
-        <!-- Ideal Zone -->
-        <div style="position:absolute; height:100%; left:${idealLeft}%; width:${idealWidth}%; background:rgba(16,185,129,0.15); border-left:2px solid #10b981; border-right:2px solid #10b981; border-radius:3px"></div>
-        <!-- Marker -->
-        <div style="position:absolute; top:-8px; bottom:-8px; width:4px; background:${color}; box-shadow:0 0 0 2px var(--surface); border-radius:2px; left:${pctFill}%; transition:left 0.5s ease-out">
-           <div style="position:absolute; top:-24px; left:-14px; width:32px; text-align:center; font-size:.65rem; font-weight:700; background:${color}; color:#fff; padding:3px 0; border-radius:4px">You</div>
+
+      <div class="metrics-grid">
+        <div class="metric-mini-card">
+          <span class="mini-card-label">Body Fat %</span>
+          <span class="mini-card-val">${bf > 0 ? bf.toFixed(1) + '%' : '—'}</span>
+          <span class="mini-card-sub">Navy Method</span>
+        </div>
+        <div class="metric-mini-card">
+          <span class="mini-card-label">Daily TDEE</span>
+          <span class="mini-card-val">${Math.round(tdee)}</span>
+          <span class="mini-card-sub">Maintenance Cal</span>
+        </div>
+        <div class="metric-mini-card">
+          <span class="mini-card-label">WtH Ratio</span>
+          <span class="mini-card-val">${wthr > 0 ? wthr.toFixed(2) : '—'}</span>
+          <span class="mini-card-sub">${wthr > 0.53 ? 'High Risk' : wthr > 0 ? 'Healthy' : '—'}</span>
+        </div>
+        <div class="metric-mini-card">
+          <span class="mini-card-label">Body Frame</span>
+          <span class="mini-card-val">${frame}</span>
+          <span class="mini-card-sub">By Wrist</span>
         </div>
       </div>
-      
-      <div style="display:flex; justify-content:space-between; font-size:.65rem; color:var(--ink3); font-weight:700; text-transform:uppercase; margin-top:-1.2rem; margin-bottom:1.2rem">
-        <span>< ${under.toFixed(1)}</span>
-        <span style="color:#10b981">Dosha Ideal Zone</span>
-        <span>> ${over.toFixed(1)}</span>
+
+      <div class="dosha-range-card">
+        <div class="range-header">
+          <span class="range-title">Prakriti Ideal Range</span>
+          <span class="frame-badge">${frame} Frame</span>
+        </div>
+        <div class="range-visual">
+          <div class="range-fill" style="left:${((under - 10) / 30) * 100}%; width:${((over - under) / 30) * 100}%"></div>
+          <div class="range-marker" style="left:${((bmiVal - 10) / 30) * 100}%; background:${color}"></div>
+        </div>
+        <div class="range-labels">
+          <span>${Math.round(under * (h * h))} kg</span>
+          <span style="color:var(--gold)">Target: ${Math.round(under * (h * h))}-${Math.round(over * (h * h))} kg</span>
+          <span>${Math.round(over * (h * h))} kg</span>
+        </div>
+        <p style="font-size:0.75rem; color:var(--ink3); margin-top:0.8rem; text-align:center">${goalText}</p>
       </div>
-      
-      <div style="background:var(--bg2); padding:1rem; border-radius:8px; border:1px solid var(--border); font-size:.85rem; color:var(--ink2); line-height:1.6">
-        <strong style="color:var(--ink); display:block; margin-bottom:0.2rem">Ayurvedic Insight</strong> 
-        ${advice}
+
+      <div class="bmi-accordion">
+        <div class="acc-item">
+          <button class="acc-trigger">What does this metric mean?</button>
+          <div class="acc-content">
+            <p style="margin-bottom:0.8rem">Your BMI of <strong>${bmiVal.toFixed(1)}</strong> is analyzed relative to your <strong>${App.scores.v > App.scores.k ? 'Vata' : 'Kapha'}</strong> constitution. 
+            Ayurveda considers bone density and metabolic fire (Agni).</p>
+            <p><strong>Status:</strong> ${sanskrit} — ${advice}</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">Ayurvedic Recommendations</button>
+          <div class="acc-content">
+            <div style="margin-bottom:0.7rem">
+              ${bmiVal < under ? '<span class="therapy-tag">Brimhana</span><span class="therapy-tag">Abhyanga</span>' :
+        bmiVal > over ? '<span class="therapy-tag">Langhana</span><span class="therapy-tag">Udvartana</span>' :
+          '<span class="therapy-tag">Rasayana</span>'}
+            </div>
+            <p>Based on your current levels, these traditional adjustments help maintain Dhatu (tissue) equilibrium.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-trigger">Weight Trend Tracker</button>
+          <div class="acc-content">
+            <button id="btn-log-weight" class="btn btn--outline btn--sm" style="width:100%; margin-bottom:0.5rem">Log Current Weight (${w.toFixed(1)}kg)</button>
+            ${historyHTML}
+          </div>
+        </div>
       </div>
     `;
-  });
 
+    // Accordion Logic
+    out.querySelectorAll('.acc-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.parentElement.classList.toggle('active');
+      });
+    });
+
+    // Animate Gauge
+    setTimeout(() => {
+      const fill = document.getElementById('gauge-fill');
+      if (fill) {
+        const perc = (Math.min(40, Math.max(10, bmiVal)) - 10) / 30;
+        fill.style.strokeDasharray = `${perc * 100}, 100`;
+      }
+      const needle = document.getElementById('gauge-needle');
+      if (needle) needle.style.transform = `rotate(${angle}deg)`;
+    }, 150);
+
+    // Trend Tracker Binding
+    const btnLog = document.getElementById('btn-log-weight');
+    if (btnLog) {
+      btnLog.addEventListener('click', () => {
+        const hist = JSON.parse(localStorage.getItem('ojas_weight_history') || '[]');
+        hist.push({ date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }), weight: w.toFixed(1) });
+        if (hist.length > 5) hist.shift();
+        localStorage.setItem('ojas_weight_history', JSON.stringify(hist));
+        btnLog.textContent = "✅ Weight Logged";
+        btnLog.disabled = true;
+      });
+    }
+  });
   if (typeof initFoodChecker === 'function') initFoodChecker();
   showScreen('screen-result');
 }
