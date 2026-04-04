@@ -37,7 +37,7 @@ function buildResult() {
 
   /* ── Hero HTML ── */
   const heroHTML = isDual ? `
-    <p class="section-label">Namaste, ${App.name} 🙏</p>
+    <p class="section-label">${t('Namaste')}, ${App.name} 🙏</p>
     <div class="divider"></div>
     <div class="dual-hero-icons">
       <span class="dual-hero-icon">${d.icon}</span>
@@ -48,7 +48,7 @@ function buildResult() {
       <span style="color:${d.color}">${d.name}</span>
       <span style="color:var(--ink4);font-weight:300"> – </span>
       <span style="color:${s.color}">${s.name}</span>
-      <span style="display:block;font-family:'Lato',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-top:.45rem">Dual Dosha Prakriti</span>
+      <span style="display:block;font-family:'Lato',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-top:.45rem">${t('Dual Dosha Prakriti')}</span>
     </h1>
     <p style="font-size:.83rem;color:var(--ink3);line-height:1.8;max-width:520px;margin:.6rem auto 1rem">
       Most people carry a <strong>dual dosha constitution</strong>. Your primary is
@@ -68,19 +68,19 @@ function buildResult() {
     <div class="dual-desc-grid">
       <div class="dual-desc-card dual-desc-card--dom">
         <span class="dual-desc-icon">${d.icon}</span>
-        <strong style="color:${d.color}">${d.name} · Primary · ${domPct}%</strong>
+        <strong style="color:${d.color}">${d.name} · ${t('Primary')} · ${domPct}%</strong>
         <p>${d.desc}</p>
         <p class="res-element" style="margin-top:.5rem;font-size:.72rem">${d.element}</p>
       </div>
       <div class="dual-desc-card dual-desc-card--sec">
         <span class="dual-desc-icon">${s.icon}</span>
-        <strong style="color:${s.color}">${s.name} · Secondary · ${secPct}%</strong>
+        <strong style="color:${s.color}">${s.name} · ${t('Secondary')} · ${secPct}%</strong>
         <p>${s.desc}</p>
         <p class="res-element" style="margin-top:.5rem;font-size:.72rem">${s.element}</p>
       </div>
     </div>
   ` : `
-    <p class="section-label">Namaste, ${App.name} 🙏</p>
+    <p class="section-label">${t('Namaste')}, ${App.name} 🙏</p>
     <div class="divider"></div>
     <span class="res-dosha-icon" aria-hidden="true">${d.icon}</span>
     <h1 class="res-name ${d.nameClass}">${d.label}</h1>
@@ -107,7 +107,7 @@ function buildResult() {
       <br/><br/>
       ${ICONS.classical} <strong>${s.name}:</strong> ${s.classical}
     </div>` : `
-    <div class="classical-note">${ICONS.classical} <strong>Classical Reference:</strong> ${d.classical}</div>`;
+    <div class="classical-note">${ICONS.classical} <strong>${t('Classical Reference:')}</strong> ${d.classical}</div>`;
 
   /* ══════════════════════════════════════════════════
      HELPERS
@@ -159,8 +159,8 @@ function buildResult() {
     return `
     <p style="font-size:.78rem;color:var(--ink3);margin-bottom:.9rem;line-height:1.65"><strong>Principle:</strong> ${fd.principle}</p>
     <div class="pa-cols">
-      <div class="pa-col favour"><h4>✓ Favour</h4><ul class="pa-list">${fd.prefer.map(i => `<li>${i}</li>`).join('')}</ul></div>
-      <div class="pa-col avoid"><h4>✕ Reduce / Avoid</h4><ul class="pa-list">${fd.avoid.map(i => `<li>${i}</li>`).join('')}</ul></div>
+      <div class="pa-col favour"><h4>${t('✓ Favour')}</h4><ul class="pa-list">${fd.prefer.map(i => `<li>${i}</li>`).join('')}</ul></div>
+      <div class="pa-col avoid"><h4>${t('✕ Reduce / Avoid')}</h4><ul class="pa-list">${fd.avoid.map(i => `<li>${i}</li>`).join('')}</ul></div>
     </div>`;
   }
 
@@ -272,15 +272,15 @@ function buildResult() {
   document.getElementById('res-scroll').innerHTML = `
 
     <div class="share-banner">
-      <span style="font-size:.78rem;color:var(--ink2);font-weight:700;white-space:nowrap">${ICONS.share} Share:</span>
+      <span style="font-size:.78rem;color:var(--ink2);font-weight:700;white-space:nowrap">${ICONS.share} ${t('res.share')}</span>
       <input class="share-url-input" id="share-url-input" value="${shareURL}" readonly aria-label="Shareable URL"/>
-      <button class="btn-copy" id="btn-copy-url">Copy link</button>
+      <button class="btn-copy" id="btn-copy-url">${t('res.copy')}</button>
     </div>
 
     <div class="res-tabs" role="tablist">
-      <button class="res-tab-btn active" data-target="tab-overview">📊 Overview</button>
-      <button class="res-tab-btn" data-target="tab-insights">🌿 Insights</button>
-      <button class="res-tab-btn" data-target="tab-tools">⚖️ Tools & Checks</button>
+      <button class="res-tab-btn active" data-target="tab-overview">${t('tab.overview')}</button>
+      <button class="res-tab-btn" data-target="tab-insights">${t('tab.insights')}</button>
+      <button class="res-tab-btn" data-target="tab-tools">${t('tab.tools')}</button>
     </div>
 
     <div id="tab-overview" class="res-tab-panel active">
@@ -289,7 +289,7 @@ function buildResult() {
       ${classicalNote}
 
       <div class="breakdown">
-        <p class="breakdown-title">${ICONS.chart} Dosha Score Breakdown</p>
+        <p class="breakdown-title">${ICONS.chart} ${t('Dosha Score Breakdown')}</p>
         <div class="b-row">
           <span class="b-label b-label--v">${ICONS.vata} Vata</span>
           <div class="b-track"><div class="b-bar b-bar--v" id="bar-v" style="width:0%"></div></div>
@@ -314,7 +314,7 @@ function buildResult() {
 
     <div id="tab-tools" class="res-tab-panel">
     <div class="ana-card" id="bmi-card" style="margin-bottom:1.5rem; opacity:1; animation:none;">
-      <div class="card-head" style="margin-bottom:.9rem;"><span class="card-icon">⚖️</span><h3 class="card-title">Prakriti-Adjusted BMI & Health</h3></div>
+      <div class="card-head" style="margin-bottom:.9rem;"><span class="card-icon">⚖️</span><h3 class="card-title">${t('Prakriti-Adjusted BMI & Health')}</h3></div>
       
       <p style="font-size:.82rem;color:var(--ink2);line-height:1.6;margin-bottom:1.2rem">
         Enhanced with <strong>Age</strong>, <strong>Gender</strong>, and <strong>Frame Analysis</strong> for clinical accuracy.
@@ -322,21 +322,21 @@ function buildResult() {
       </p>
       
       <div class="pill-tabs" style="width:100%; margin-bottom:1.2rem">
-        <button id="btn-bmi-metric" class="pill-tab active" style="flex:1">Metric</button>
-        <button id="btn-bmi-imperial" class="pill-tab" style="flex:1">Imperial</button>
+        <button id="btn-bmi-metric" class="pill-tab active" style="flex:1">${t('Metric')}</button>
+        <button id="btn-bmi-imperial" class="pill-tab" style="flex:1">${t('Imperial')}</button>
       </div>
       
       <!-- Frictionless Home Profile -->
       <div class="bmi-input-grid">
         <div class="bmi-field-group">
-          <label class="bmi-label">Age</label>
+          <label class="bmi-label">${t('Age')}</label>
           <input type="number" id="bmi-age" class="bmi-input" placeholder="Years">
         </div>
         <div class="bmi-field-group">
-          <label class="bmi-label">Gender</label>
+          <label class="bmi-label">${t('Gender')}</label>
           <select id="bmi-gender" class="bmi-input bmi-select">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="male">${t('Male')}</option>
+            <option value="female">${t('Female')}</option>
           </select>
         </div>
         <div class="bmi-field-group--full">
@@ -418,26 +418,25 @@ function buildResult() {
 
     <div id="tab-insights" class="res-tab-panel">
       <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.65rem; color:var(--ink); margin:0 0 1.2rem; text-align:center; padding-bottom:.2rem;">
-        <span style="color:var(--gold); opacity: 0.6;">✦</span> Ayurvedic Insights <span style="color:var(--gold); opacity: 0.6;">✦</span>
+        <span style="color:var(--gold); opacity: 0.6;">✦</span> ${t('Ayurvedic Insights')} <span style="color:var(--gold); opacity: 0.6;">✦</span>
       </h2>
 
-      ${whyCard}
-      ${imbalanceCard}
-      ${dietCard}
-      ${lifestyleCard}
-      ${exerciseCard}
-      ${rhythmCard}
-      ${herbCard}
-      ${seasonCard}
+      ${dualCard(ICONS.search, `${t('Why This Is Your Prakriti')}${titleSuffix}`, `<p class="why-text">${d.why}</p>`, `<p class="why-text">${d.why}</p>`, `<p class="why-text">${s.why}</p>`, true)}
+      ${dualCard(ICONS.imbalance, `${t('Signs of Imbalance')}${titleSuffix}`, imbalGrid(d), imbalGrid(d), imbalGrid(s))}
+      ${dualCard(ICONS.diet, `${t('Diet — Āhāra')}${titleSuffix}`, paCols(d.foods), paCols(d.foods), paCols(s.foods))}
+      ${dualCard(ICONS.rhythm, `${t('Lifestyle — Vihāra')}${titleSuffix}`, paCols(d.lifestyle), paCols(d.lifestyle), paCols(s.lifestyle))}
+      ${dualCard(ICONS.exercise, `${t('Exercise — Vyāyāma')}${titleSuffix}`, paCols(d.exercise), paCols(d.exercise), paCols(s.exercise))}
+      ${dualCard(ICONS.rhythm, `${t('Daily Rhythm — Dinacharya')}${titleSuffix}`, rhythmPanel(d), rhythmPanel(d), rhythmPanel(s))}
+      ${dualCard(ICONS.kapha, `${t('Classical Herbs — Dravyaguna')}${titleSuffix}`, herbPanel(d), herbPanel(d), herbPanel(s))}
+      ${dualCard(ICONS.season, `${t('Seasonal Guidance — Ritucharya')}${titleSuffix}`, seasonPanel(d), seasonPanel(d), seasonPanel(s))}
     </div>
 
     <p class="disclaimer">
-      🪷 Based on Charaka Samhita and Sushruta Samhita — for educational awareness only, not medical diagnosis.
-      Consult a qualified Ayurvedic practitioner for personalised guidance.
+      ${t('disclaimer')}
     </p>
 
     <div class="cta-row">
-      <button class="btn btn--gold" id="btn-retake-bottom">↺ Retake Quiz</button>
+      <button class="btn btn--gold" id="btn-retake-bottom">${t('btn.retake.bottom')}</button>
     </div>
   `;
 
@@ -485,11 +484,11 @@ function buildResult() {
   document.getElementById('btn-copy-url').addEventListener('click', function () {
     const val = document.getElementById('share-url-input').value;
     navigator.clipboard.writeText(val).then(() => {
-      this.textContent = '✅ Copied!';
-      setTimeout(() => { this.textContent = 'Copy link'; }, 2200);
+      this.textContent = t('res.copied');
+      setTimeout(() => { this.textContent = t('res.copy'); }, 2200);
     }).catch(() => {
       document.getElementById('share-url-input').select();
-      this.textContent = '↑ Select & copy';
+      this.textContent = t('res.select');
     });
   });
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html id="html-root" lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
@@ -34,38 +34,43 @@
     <div class="land-splash" id="land-splash">
       <div class="land-lotus" id="icon-lotus-1" aria-hidden="true"></div>
       <h1 class="brand-title">OJAS</h1>
-      <p class="brand-sub">Prakriti Analyser</p>
+      <p class="brand-sub" data-i18n="brand.sub">Prakriti Analyser</p>
       <div class="dosha-pills" aria-label="The three doshas">
         <span class="pill pill--vata" id="icon-pill-v"></span>
         <span class="pill pill--pitta" id="icon-pill-p"></span>
         <span class="pill pill--kapha" id="icon-pill-k"></span>
       </div>
-      <p class="land-desc">
+      <p class="land-desc" data-i18n="land.desc">
         Rooted in <em>Charaka &amp; Sushruta Samhita</em>. 18 questions across
         body, physiology and mind — discover your constitution with dosha
         breakdown, imbalance signs, diet, lifestyle &amp; daily rhythm.
       </p>
       <div class="land-features" aria-hidden="true">
-        <div class="feat"><span id="icon-feat-classical" class="icon-holder"></span><span>Classical</span></div>
-        <div class="feat"><span id="icon-feat-search" class="icon-holder"></span><span>Dual Dosha</span></div>
-        <div class="feat"><span id="icon-feat-diet" class="icon-holder"></span><span>Diet</span></div>
-        <div class="feat"><span id="icon-feat-rhythm" class="icon-holder"></span><span>Rhythm</span></div>
-        <div class="feat"><span id="icon-feat-imbalance" class="icon-holder"></span><span>Imbalance</span></div>
+        <div class="feat"><span id="icon-feat-classical" class="icon-holder"></span><span
+            data-i18n="feat.classical">Classical</span></div>
+        <div class="feat"><span id="icon-feat-search" class="icon-holder"></span><span data-i18n="feat.dual">Dual
+            Dosha</span></div>
+        <div class="feat"><span id="icon-feat-diet" class="icon-holder"></span><span data-i18n="feat.diet">Diet</span>
+        </div>
+        <div class="feat"><span id="icon-feat-rhythm" class="icon-holder"></span><span
+            data-i18n="feat.rhythm">Rhythm</span></div>
+        <div class="feat"><span id="icon-feat-imbalance" class="icon-holder"></span><span
+            data-i18n="feat.imbalance">Imbalance</span></div>
       </div>
-      <button class="btn btn--rose" id="btn-enter">Begin My Analysis →</button>
+      <button class="btn btn--rose" id="btn-enter" data-i18n="btn.enter">Begin My Analysis →</button>
     </div>
 
     <!-- Phase B: Name entry -->
     <div class="land-name-panel" id="land-name-panel" aria-hidden="true">
-      <button class="name-back-btn" id="btn-name-back" aria-label="Back to splash">← Back</button>
+      <button class="name-back-btn" id="btn-name-back" aria-label="Back to splash" data-i18n="name.back">← Back</button>
       <div class="name-panel-inner">
         <div class="name-lotus" id="icon-lotus-2" aria-hidden="true"></div>
-        <h2 class="name-title">What's your name?</h2>
-        <p class="name-sub">Your results will be personalised to you</p>
+        <h2 class="name-title" data-i18n="name.title">What's your name?</h2>
+        <p class="name-sub" data-i18n="name.sub">Your results will be personalised to you</p>
         <input class="name-field" id="inp-name" type="text" maxlength="40" autocomplete="given-name"
-          placeholder="Enter your name…" aria-label="Your name" />
-        <button class="btn btn--rose btn--full" id="btn-start">Start Analysis →</button>
-        <p class="name-hint">Press Enter or tap Start</p>
+          placeholder="Enter your name…" data-i18n-placeholder="name.placeholder" aria-label="Your name" />
+        <button class="btn btn--rose btn--full" id="btn-start" data-i18n="btn.start">Start Analysis →</button>
+        <p class="name-hint" data-i18n="name.hint">Press Enter or tap Start</p>
       </div>
     </div>
 
@@ -76,8 +81,9 @@
   ═══════════════════════════════════════ -->
   <section id="screen-explainer" class="screen" aria-label="Dosha Explainer">
     <div class="explainer-content">
-      <h2 class="explainer-title" id="explainer-title">Before we begin...</h2>
-      <p class="explainer-desc" id="explainer-desc">Your Prakriti is uniquely composed of three vital energies (Doshas).
+      <h2 class="explainer-title" id="explainer-title" data-i18n="explainer.title">Before we begin...</h2>
+      <p class="explainer-desc" id="explainer-desc" data-i18n="explainer.desc">Your Prakriti is uniquely composed of
+        three vital energies (Doshas).
       </p>
 
       <div class="explainer-doshas">
@@ -85,27 +91,28 @@
           <div class="explainer-icon" id="icon-exp-v"></div>
           <div>
             <h3>Vata</h3>
-            <p>Movement &amp; Creativity</p>
+            <p data-i18n="exp.vata.desc">Movement &amp; Creativity</p>
           </div>
         </div>
         <div class="explainer-dosha" id="exp-pitta">
           <div class="explainer-icon" id="icon-exp-p"></div>
           <div>
             <h3>Pitta</h3>
-            <p>Digestion &amp; Transformation</p>
+            <p data-i18n="exp.pitta.desc">Digestion &amp; Transformation</p>
           </div>
         </div>
         <div class="explainer-dosha" id="exp-kapha">
           <div class="explainer-icon" id="icon-exp-k"></div>
           <div>
             <h3>Kapha</h3>
-            <p>Structure &amp; Stability</p>
+            <p data-i18n="exp.kapha.desc">Structure &amp; Stability</p>
           </div>
         </div>
       </div>
 
       <button class="btn btn--rose btn--full" id="btn-start-quiz"
-        style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease; max-width: 320px; margin: 2rem auto 0; display: block;">Reveal
+        style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease; max-width: 320px; margin: 2rem auto 0; display: block;"
+        data-i18n="btn.start.quiz">Reveal
         My Prakriti →</button>
     </div>
   </section>
@@ -129,9 +136,10 @@
     </div>
 
     <div class="quiz-nav-row">
-      <button class="btn-back" id="btn-back" disabled aria-label="Previous question">← Back</button>
+      <button class="btn-back" id="btn-back" disabled aria-label="Previous question" data-i18n="quiz.back">←
+        Back</button>
       <span class="save-indicator" id="save-indicator">
-        <span class="save-dot"></span> Saved
+        <span class="save-dot"></span> <span data-i18n="quiz.saved">Saved</span>
       </span>
     </div>
 
@@ -143,13 +151,13 @@
           <div class="q-icon-wrap" id="q-icon" aria-hidden="true"></div>
           <span class="q-category" id="q-category">Body</span>
         </div>
-        <p class="q-text" id="q-text">Loading…</p>
+        <p class="q-text" id="q-text" data-i18n="quiz.loading">Loading…</p>
         <div class="q-options" id="q-options" role="group" aria-label="Answer options"></div>
         <div class="q-fact" id="q-fact" aria-live="polite"></div>
       </div>
     </div>
 
-    <div class="quiz-kb-hint" aria-label="Keyboard shortcuts">
+    <div class="quiz-kb-hint" aria-label="Keyboard shortcuts" data-i18n="quiz.hint">
       Press <kbd>A</kbd> · <kbd>B</kbd> · <kbd>C</kbd> to answer
     </div>
 
@@ -166,7 +174,7 @@
 
     <header class="res-header">
       <span class="res-brand">OJAS</span>
-      <button class="btn btn--outline btn--sm" id="btn-retake">↺ Retake</button>
+      <button class="btn btn--outline btn--sm" id="btn-retake" data-i18n="res.retake">↺ Retake</button>
     </header>
 
     <div class="res-scroll" id="res-scroll"></div>
@@ -175,14 +183,20 @@
 
 
   <!-- ─── Global UI ─── -->
-  <button id="dark-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+  <div style="position:fixed; bottom:1.2rem; right:1.2rem; display:flex; gap:.6rem; z-index:900;">
+    <button id="lang-btn" aria-label="Toggle language" title="Toggle language"
+      style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--bg2);color:var(--ink);font-size:0.8rem;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(0,0,0,0.05);">A/अ</button>
+    <button id="dark-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+  </div>
 
-  <script src="icons.js?v=5"></script>
-  <script src="food-db.js?v=5"></script>
-  <script src="food-checker.js?v=5"></script>
-  <script src="app.js?v=5"></script>
-  <script src="quiz.js?v=5"></script>
-  <script src="result.js?v=5"></script>
+  <script src="icons.js?v=6"></script>
+  <script src="i18n.js?v=6"></script>
+  <script src="i18n-hi.js?v=6"></script>
+  <script src="food-db.js?v=6"></script>
+  <script src="food-checker.js?v=6"></script>
+  <script src="app.js?v=6"></script>
+  <script src="quiz.js?v=6"></script>
+  <script src="result.js?v=6"></script>
 </body>
 
 </html>

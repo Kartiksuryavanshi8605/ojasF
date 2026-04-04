@@ -18,6 +18,9 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
+      .catch(error => {
+        console.warn('Service Worker: Failed to open cache (ignoring for Live Server/Incognito):', error);
+      })
   );
 });
 
@@ -27,11 +30,12 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
+            return caches.delete(cacheName).catch(err => console.warn('Service Worker: Cache delete error:', err));
           }
         })
       );
     }).then(() => self.clients.claim())
+    .catch(error => console.warn('Service Worker: Failed to activate:', error))
   );
 });
 
@@ -39,5 +43,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))
+      .catch(error => fetch(event.request))
   );
 });

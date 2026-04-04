@@ -4,7 +4,7 @@
 ═══════════════════════════════════════════════════════ */
 
 /* ── 18 Questions ── */
-const QUESTIONS = [
+window.QUESTIONS_EN = [
   {
     icon: ICONS.frame, cat: 'Body · Frame',
     text: 'Your natural body type?',
@@ -188,7 +188,7 @@ const QUESTIONS = [
 ];
 
 /* ── Dosha Data ── */
-const DOSHA = {
+window.DOSHA_EN = {
   v: {
     name: 'Vata', label: 'Vata Prakriti', icon: ICONS.vata,
     element: 'Ākāsha (Ether) + Vāyu (Air)',
@@ -336,6 +336,39 @@ const DOSHA = {
 };
 
 /* ── Quiz Engine ── */
+function getLocalizedQuestions() {
+  if (window.AppLang === 'hi' && window.QUESTIONS_HI) return window.QUESTIONS_HI;
+  return window.QUESTIONS_EN;
+}
+
+function getLocalizedDosha() {
+  if (window.AppLang === 'hi' && window.DOSHA_HI) return window.DOSHA_HI;
+  return window.DOSHA_EN;
+}
+
+// Proxies so we don't have to rewrite everything
+let QUESTIONS = getLocalizedQuestions();
+let DOSHA = getLocalizedDosha();
+
+window.updateContentLanguage = function() {
+  QUESTIONS = getLocalizedQuestions();
+  DOSHA = getLocalizedDosha();
+  
+  // If quiz is active, re-render text
+  if (document.getElementById('screen-quiz')?.classList.contains('active') && !App.locked) {
+    if (App.currentQ < QUESTIONS.length) {
+      renderQuestion();
+    }
+  }
+  
+  // If results is active, rebuild
+  if (document.getElementById('screen-result')?.classList.contains('active')) {
+    if (typeof buildResult === 'function') {
+      buildResult();
+    }
+  }
+};
+
 function startQuiz() {
   App.locked = false;
   updateLiveBadges();
